@@ -3,9 +3,9 @@ import moment from "moment";
 import ArticulosBuscar from "./ArticulosBuscar";
 import ArticulosListado from "./ArticulosListado";
 import ArticulosRegistro from "./ArticulosRegistro";
-import { articulosService } from "../../services/articulos.services";
-import { articulosFamiliasService } from "../../services/articulosFamilias.services";
-import modalDialogService from "../../services/modalDialog.services";
+import { articulosService } from "../services/articulos.services";
+import { articulosFamiliasService } from "../services/articulosFamilias.services";
+import modalDialogService from "../services/modalDialog.services";
 
 function Articulos() {
   const TituloAccionABMC = {

@@ -5,7 +5,7 @@ import { Inicio } from "./components/Inicio";
 import { Menu } from "./components/Menu";
 import { Footer } from "./components/Footer";
 
-import { Articulos } from "./components/articulos/Articulos";
+import { Articulos } from "./components/Articulos";
 import { ArticulosFamilias } from "./components/ArticulosFamilias";
 
 import { ModalDialog } from "./components/ModalDialog";
