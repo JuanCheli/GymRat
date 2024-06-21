@@ -1,11 +1,23 @@
 import "./App.css";
-import {ArticulosFamilias} from './components/ArticulosFamilias';
+import { BrowserRouter, Route, Routes, Navigate } from "react-router-dom";
+import { Inicio } from "./components/Inicio";
+import { ArticulosFamilias } from "./components/ArticulosFamilias";
+import {Menu} from "./components/Menu";
+import { Footer } from "./components/Footer";
 function App() {
   return (
     <>
-      <div className="divBody">
-          <ArticulosFamilias/>
-      </div>
+      <BrowserRouter>
+        <Menu />
+        <div className="divBody">
+            <Routes>
+              <Route path="/inicio" element={<Inicio />} />
+              <Route path="/articulosfamilias" element={<ArticulosFamilias />} />
+              <Route path="*" element={<Navigate to="/Inicio" replace />} />
+            </Routes>
+        </div>
+        <Footer/>
+      </BrowserRouter>
     </>
   );
 }

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { articulosFamiliasMockService } from "../services/articulosFamilias-mock.service";
+import { articulosFamiliasMockService } from "../services/articulosFamilias-mock-service";
 function ArticulosFamilias() {
   const tituloPagina = "ArticulosFamilias";
   const [articulosFamilias, setArticulosFamilias] = useState(null);
