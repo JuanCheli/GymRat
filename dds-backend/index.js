@@ -22,6 +22,10 @@ app.use(articulosfamiliasRouter);
 const articulosRouter = require("./routes/articulos");
 app.use(articulosRouter);
 
+const seguridadRouter = require("./routes/seguridad");
+app.use(seguridadRouter);
+
+
 
 // Levantar servidor
 const port = 3000;

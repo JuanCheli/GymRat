@@ -2,6 +2,8 @@ const express = require("express");
 const router = express.Router();
 const db = require("../base-orm/sequelize-init");
 const { Op, ValidationError } = require("sequelize");
+const auth = require("../seguridad/auth");
+
 
 router.get("/api/articulos", async function (req, res, next) {
     // #swagger.tags = ['Articulos']
@@ -191,4 +193,40 @@ router.delete("/api/articulos/:id", async (req, res) => {
         }
     }
 });
+
+//------------------------------------
+//-- SEGURIDAD ---------------------------
+//------------------------------------
+router.get(
+    "/api/articulosJWT",
+    auth.authenticateJWT,
+    async function (req, res, next) {
+      /* #swagger.security = [{
+                 "bearerAuth1": []
+          }] */
+  
+      // #swagger.tags = ['Articulos']
+      // #swagger.summary = 'obtiene todos los Artículos, con seguridad JWT, solo para rol: admin (usuario:admin, clave:123)'
+      const { rol } = res.locals.user;
+      if (rol !== "admin") {
+        return res.status(403).json({ message: "usuario no autorizado!" });
+      }
+  
+      let items = await db.articulos.findAll({
+        attributes: [
+          "IdArticulo",
+          "Nombre",
+          "Precio",
+          "CodigoDeBarra",
+          "IdArticuloFamilia",
+          "Stock",
+          "FechaAlta",
+          "Activo",
+        ],
+        order: [["Nombre", "ASC"]],
+      });
+      res.json(items);
+    }
+  );
+  
 module.exports = router;
