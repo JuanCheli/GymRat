@@ -22,6 +22,10 @@ app.use(gimnasioRouter);
 const maquinasRouter = require("./routes/maquinas");
 app.use(maquinasRouter);
 
+const seguridadRouter = require("./routes/seguridad");
+app.use(seguridadRouter);
+
+
 
 // Levantar servidor
 if (!module.parent) {   // si no es llamado por otro módulo, es decir, si es el módulo principal -> levantamos el servidor

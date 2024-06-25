@@ -162,4 +162,38 @@ router.delete("/api/maquinas/:id", async (req, res) => {
     }
 });
 
+//------------------------------------
+//-- SEGURIDAD ---------------------------
+//------------------------------------
+router.get(
+    "/api/maquinasJWT",
+    auth.authenticateJWT,
+    async function (req, res, next) {
+      /* #swagger.security = [{
+                 "bearerAuth1": []
+          }] */
+  
+      // #swagger.tags = ['maquinas']
+      // #swagger.summary = 'obtiene todas las Maquinas, con seguridad JWT, solo para rol: admin (usuario:admin, clave:123)'
+      const { rol } = res.locals.user;
+      if (rol !== "admin") {
+        return res.status(403).json({ message: "usuario no autorizado!" });
+      }
+  
+      let items = await db.Maquina.findAll({
+        attributes: [
+            "IdMaquina",
+            "Nombre",
+            "Gimnasio",
+            "Proveedor",
+            "FechaCreacion",
+            "Eliminado"
+        ],
+        order: [["Nombre", "ASC"]],
+      });
+      res.json(items);
+    }
+  );
+  
+
 module.exports = router;
