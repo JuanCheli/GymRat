@@ -10,7 +10,7 @@ app.use(cors({origin: "*"})) // para poder leer json en el body
 
 // Controlar ruta
 app.get("/", (req, res) => {
-  res.send("Backend inicial dds-backend!");
+  res.send("Backend GymRat inicializado!");
 });
 
 const articulosfamiliasmockRouter = require("./routes/articulosfamiliasmock");
