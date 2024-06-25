@@ -17,6 +17,12 @@ app.get("/", (req, res) => {
 const gimnasioRouter = require("./routes/gimnasios");
 app.use(gimnasioRouter);
 
+const proveedoresRouter = require("./routes/proveedores");
+app.use(proveedoresRouter);
+
+const inscriptosRouter = require("./routes/inscriptos");
+app.use(inscriptosRouter)
+
 const maquinasRouter = require("./routes/maquinas");
 app.use(maquinasRouter);
 

@@ -50,12 +50,12 @@ async function CrearBaseSiNoExiste() {
 
   existe = false;
   sql =
-    "SELECT count(*) as contar FROM sqlite_schema WHERE type = 'table' and name= 'proveedor'";
+    "SELECT count(*) as contar FROM sqlite_schema WHERE type = 'table' and name= 'proveedores'";
   res = await db.get(sql, []);
   if (res.contar > 0) existe = true;
   if (!existe) {
     await db.run(
-      `CREATE table proveedor(
+      `CREATE table proveedores(
         IdProveedor INTEGER PRIMARY KEY AUTOINCREMENT,
         Nombre text NOT NULL,
         Pais text NOT NULL,
@@ -67,7 +67,7 @@ async function CrearBaseSiNoExiste() {
     console.log("tabla proveedor creada!");
 
     await db.run(
-      `insert into proveedor (Nombre, Pais, Telefono, FechaAltaEmpresa) values
+      `insert into proveedores (Nombre, Pais, Telefono, FechaAltaEmpresa) values
       ('FitnessPro', 'Argentina', '123456789', '2010-01-01'),
       ('GymTech', 'Brasil', '987654321', '2012-05-15'),
       ('StrongFit', 'Chile', '555666777', '2015-09-30'),
@@ -162,7 +162,37 @@ async function CrearBaseSiNoExiste() {
       ('Juan Torres', '2023-05-01', 7),
       ('Laura Sanchez', '2023-05-20', 8),
       ('Santiago Ramirez', '2023-06-10', 9),
-      ('Valeria Gomez', '2023-07-05', 10);`
+      ('Valeria Gomez', '2023-07-05', 10),
+      ('Roberto Diaz', '2023-08-01', 1),
+      ('Marta Alvarez', '2023-08-15', 2),
+      ('Gabriel Soto', '2023-09-10', 3),
+      ('Patricia Mendez', '2023-09-20', 4),
+      ('Javier Herrera', '2023-10-05', 5),
+      ('Natalia Campos', '2023-10-15', 6),
+      ('Miguel Silva', '2023-11-01', 7),
+      ('Sandra Morales', '2023-11-10', 8),
+      ('Hugo Gutierrez', '2023-11-20', 9),
+      ('Claudia Ponce', '2023-12-01', 10),
+      ('Andres Vazquez', '2023-12-10', 1),
+      ('Sofia Reyes', '2023-12-20', 2),
+      ('Francisco Ortega', '2024-01-01', 3),
+      ('Daniela Castro', '2024-01-10', 4),
+      ('Eduardo Navarro', '2024-01-20', 5),
+      ('Paula Espinosa', '2024-02-01', 6),
+      ('Raul Miranda', '2024-02-10', 7),
+      ('Alicia Figueroa', '2024-02-20', 8),
+      ('Luis Salazar', '2024-03-01', 9),
+      ('Veronica Aguilar', '2024-03-10', 10),
+      ('Ruben Castro', '2024-03-20', 1),
+      ('Elena Rivas', '2024-04-01', 2),
+      ('Gustavo Peña', '2024-04-10', 3),
+      ('Miriam Ortiz', '2024-04-20', 4),
+      ('Tomas Delgado', '2024-05-01', 5),
+      ('Estela Blanco', '2024-05-10', 6),
+      ('Felipe Ruiz', '2024-05-20', 7),
+      ('Teresa Vargas', '2024-06-01', 8),
+      ('Rodrigo Jimenez', '2024-06-10', 9),
+      ('Susana Cabrera', '2024-06-20', 10);`
     );
   }
 

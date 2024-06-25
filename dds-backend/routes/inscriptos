@@ -3,41 +3,42 @@ const router = express.Router();
 const { ValidationError } = require('sequelize');
 const db = require("../base-orm/sequelize-init");
 
-router.get("/api/gimnasios", async function (req, res, next) {
-  let data = await db.Gimnasio.findAll({
-    attributes: ["IdGimnasio", "Nombre", "FechaAlta"],
+router.get("/api/inscriptos", async function (req, res, next) {
+  let data = await db.Inscripto.findAll({
+    attributes: ["Idinscripto", "Nombre", "FechaInscripcion", "Gimnasio"],
   });
   res.json(data);
 });
 
-router.get("/api/gimnasios/:id", async function (req, res, next) {
-  // #swagger.tags = ['gimnasios']
+router.get("/api/inscriptos/:id", async function (req, res, next) {
+  // #swagger.tags = ['inscriptos']
   // #swagger.summary = 'obtiene un Articulo'
   // #swagger.parameters['id'] = { description: 'identificador del Articulo...' }
-  let items = await db.Gimnasio.findOne({
+  let items = await db.Inscripto.findOne({
     attributes: [
-      "IdGimnasio",
+      "Idinscripto",
       "Nombre",
-      "FechaAlta",
-      "Eliminado"
+      "FechaInscripcion",
+      "Gimnasio",
     ],
-    where: { IdGimnasio: req.params.id },
+    where: { Idinscripto: req.params.id },
   });
   res.json(items);
 });
 
-router.post("/api/gimnasios/", async (req, res) => {
-  // #swagger.tags = ['gimnasios']
+router.post("/api/inscriptos/", async (req, res) => {
+  // #swagger.tags = ['inscriptos']
   // #swagger.summary = 'agrega un Articulo'
   /*    #swagger.parameters['item'] = {
                 in: 'body',
                 description: 'nueva Artículo',
-                schema: { $ref: '#/definitions/gimnasios' }
+                schema: { $ref: '#/definitions/inscriptos' }
     } */
   try {
-    let data = await db.Gimnasio.create({
+    let data = await db.Inscripto.create({
       Nombre: req.body.Nombre,
-      FechaCreacion: req.body.FechaAlta
+      FechaInscripcion: req.body.FechaInscripcion,
+      Gimnasio: req.body.Gimnasio,
     });
     res.status(200).json(data.dataValues); // devolvemos el registro agregado!
   } catch (err) {
@@ -53,33 +54,33 @@ router.post("/api/gimnasios/", async (req, res) => {
   }
 });
 
-router.put("/api/gimnasios/:id", async (req, res) => {
-  // #swagger.tags = ['gimnasios']
+router.put("/api/inscriptos/:id", async (req, res) => {
+  // #swagger.tags = ['inscriptos']
   // #swagger.summary = 'actualiza un Artículo'
   // #swagger.parameters['id'] = { description: 'identificador del Artículo...' }
   /*    #swagger.parameters['Articulo'] = {
                 in: 'body',
                 description: 'Articulo a actualizar',
-                schema: { $ref: '#/definitions/gimnasios' }
+                schema: { $ref: '#/definitions/inscriptos' }
     } */
 
   try {
-    let item = await db.Gimnasio.findOne({
-      attributes: [
-        "IdGimnasio",
-        "Nombre",
-        "FechaAlta",
-        "Eliminado"
-      ],
-      where: { IdGimnasio: req.params.id },
+    let item = await db.Inscripto.findOne({
+        attributes: [
+            "IdInscripto",
+            "Nombre",
+            "FechaInscripcion",
+            "Gimnasio",
+          ],
+      where: { Idinscripto: req.params.id },
     });
     if (!item) {
-      res.status(404).json({ message: "Gimnasio No Encontrado" });
+      res.status(404).json({ message: "inscripto No Encontrado" });
       return;
     }
     item.Nombre = req.body.Nombre,
-    item.FechaCreacion = req.body.FechaCreacion,
-    item.Eliminado = req.body.Eliminado,
+    item.FechaInscripcion = req.body.FechaInscripcion,
+    item.Gimnasio = req.body.Gimnasio
     await item.save();
     res.sendStatus(204);
 
@@ -96,8 +97,8 @@ router.put("/api/gimnasios/:id", async (req, res) => {
   }
 });
 
-router.delete("/api/gimnasios/:id", async (req, res) => {
-  // #swagger.tags = ['gimnasios']
+router.delete("/api/inscriptos/:id", async (req, res) => {
+  // #swagger.tags = ['inscriptos']
   // #swagger.summary = 'elimina un Articulo'
   // #swagger.parameters['id'] = { description: 'identificador del Articulo.' }
 
@@ -105,8 +106,8 @@ router.delete("/api/gimnasios/:id", async (req, res) => {
 
   if (bajaFisica) {
     // baja física
-    let filasBorradas = await db.Gimnasio.destroy({
-      where: { IdGimnasio: req.params.id },
+    let filasBorradas = await db.Inscripto.destroy({
+      where: { Idinscripto: req.params.id },
     });
     if (filasBorradas == 1) res.sendStatus(200);
     else res.sendStatus(404);
@@ -114,9 +115,9 @@ router.delete("/api/gimnasios/:id", async (req, res) => {
     // baja lógica
     try {
       let data = await db.sequelize.query(
-        'UPDATE gimnasios SET eliminado = 1 WHERE IdGimnasio = :IdGimnasio',
+        'UPDATE inscriptos SET eliminado = 1 WHERE Idinscripto = :Idinscripto',
         {
-          replacements: { IdGimnasio: req.params.id },
+          replacements: { Idinscripto: req.params.id },
           type: db.sequelize.QueryTypes.UPDATE,
         }
       );

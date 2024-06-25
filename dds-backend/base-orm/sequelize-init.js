@@ -19,8 +19,8 @@ const Gimnasio = sequelize.define(
                     msg: "Nombre es requerido",
                 },
                 len: {
-                    args: [5, 30],
-                    msg: "Nombre debe ser entre 5 y 30 caracteres",
+                    args: [3, 30],
+                    msg: "Nombre debe ser entre 3 y 30 caracteres",
                 },
             },
         },
@@ -77,8 +77,10 @@ const Proveedor = sequelize.define(
             defaultValue: false // Esto asegura que se inicialice en 0 (false)
         },
     },
+    
     {
         timestamps: false,
+        tableName: "Proveedores"
     }
 );
 

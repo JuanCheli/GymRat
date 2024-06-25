@@ -18,7 +18,6 @@ router.get("/api/maquinas", async function (req, res, next) {
             "IdMaquina",
             "Nombre",
             "FechaCreacion",
-            "Eliminado",
         ],
         order: [["Nombre", "ASC"]],
         where,
@@ -54,7 +53,6 @@ router.get("/api/maquinas/filtro", async function (req, res, next) {
                 "Gimnasio",
                 "Proveedor",
                 "FechaCreacion",
-                "Eliminado",
             ],
             where: whereClause,
             limit: limit,
@@ -83,7 +81,6 @@ router.get("/api/maquinas/:id", async function (req, res, next) {
             "Gimnasio",
             "Proveedor",
             "FechaCreacion",
-            "Eliminado"
         ],
         where: { IdMaquina: req.params.id },
     });
