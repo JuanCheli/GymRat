@@ -13,18 +13,8 @@ app.get("/", (req, res) => {
   res.send("Backend GymRat inicializado!");
 });
 
-const articulosfamiliasmockRouter = require("./routes/articulosfamiliasmock");
-app.use(articulosfamiliasmockRouter);
-
-const articulosfamiliasRouter = require("./routes/articulosfamilias");
-app.use(articulosfamiliasRouter);
-
-const articulosRouter = require("./routes/articulos");
-app.use(articulosRouter);
-
-const seguridadRouter = require("./routes/seguridad");
-app.use(seguridadRouter);
-
+const gimnasiomockRouter = require("./routes/gimnasiomock");
+app.use(gimnasiomockRouter);
 
 
 // Levantar servidor
