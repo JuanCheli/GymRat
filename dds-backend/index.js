@@ -19,6 +19,8 @@ app.use(gimnasiomockRouter);
 const gimnasioRouter = require("./routes/gimnasios");
 app.use(gimnasioRouter);
 
+const maquinasRouter = require("./routes/maquinas");
+app.use(maquinasRouter);
 
 
 // Levantar servidor

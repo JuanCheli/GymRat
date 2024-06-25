@@ -31,11 +31,11 @@ async function CrearBaseSiNoExiste() {
   if (res.contar > 0) existe = true;
   if (!existe) {
     await db.run(
-      "CREATE table gimnasios( IdGimnasio INTEGER PRIMARY KEY AUTOINCREMENT, Nombre text NOT NULL UNIQUE, FechaAlta text);"
+      "CREATE table gimnasios( IdGimnasio INTEGER PRIMARY KEY AUTOINCREMENT, Nombre text NOT NULL UNIQUE, FechaAlta text, Eliminado BOOLEAN DEFAULT 0);"
     );
     console.log("tabla gimnasio creada!");
     await db.run(
-      `insert into gimnasios values (1,'Gol center', '2019-11-30'),
+      `insert into gimnasios (IdGimnasio, Nombre, FechaAlta) values (1,'Gol center', '2019-11-30'),
       (2,'Genesis', '2014-02-05'),
       (3,'Africa', '2011-06-17'),
       (4,'SportClub', '2022-09-26'),
@@ -60,7 +60,8 @@ async function CrearBaseSiNoExiste() {
         Nombre text NOT NULL,
         Pais text NOT NULL,
         Telefono text NOT NULL,
-        FechaAltaEmpresa text
+        FechaAltaEmpresa text,
+        Eliminado BOOLEAN DEFAULT 0
       );`
     );
     console.log("tabla proveedor creada!");
@@ -93,6 +94,7 @@ async function CrearBaseSiNoExiste() {
         Gimnasio INTEGER,
         Proveedor INTEGER,
         FechaCreacion text,
+        Eliminado BOOLEAN DEFAULT 0,
         FOREIGN KEY (Gimnasio) REFERENCES gimnasios(IdGimnasio),
         FOREIGN KEY (Proveedor) REFERENCES proveedor(IdProveedor)
       );`
@@ -143,6 +145,7 @@ async function CrearBaseSiNoExiste() {
         Nombre text NOT NULL,
         FechaInscripcion text NOT NULL,
         Gimnasio INTEGER,
+        Eliminado BOOLEAN DEFAULT 0,
         FOREIGN KEY (Gimnasio) REFERENCES gimnasios(IdGimnasio)
       );`
     );

@@ -28,6 +28,11 @@ const Gimnasio = sequelize.define(
             type: DataTypes.STRING,
             allowNull: true,
         },
+        Eliminado: {
+            type: DataTypes.BOOLEAN,
+            allowNull: false,
+            defaultValue: false // Esto asegura que se inicialice en 0 (false)
+        }
     },
     {
         hooks: {
@@ -65,6 +70,11 @@ const Proveedor = sequelize.define(
         FechaAltaEmpresa: {
             type: DataTypes.STRING,
             allowNull: true,
+        },
+        Eliminado: {
+            type: DataTypes.BOOLEAN,
+            allowNull: false,
+            defaultValue: false // Esto asegura que se inicialice en 0 (false)
         },
     },
     {
@@ -119,6 +129,11 @@ const Maquina = sequelize.define(
             type: DataTypes.STRING,
             allowNull: false,
         },
+        Eliminado: {
+            type: DataTypes.BOOLEAN,
+            allowNull: false,
+            defaultValue: false // Esto asegura que se inicialice en 0 (false)
+        },
     },
     {
         hooks: {
@@ -156,6 +171,11 @@ const Inscripto = sequelize.define(
                 model: Gimnasio,
                 key: 'IdGimnasio',
             },
+        },
+        Eliminado: {
+            type: DataTypes.BOOLEAN,
+            allowNull: false,
+            defaultValue: false // Esto asegura que se inicialice en 0 (false)
         },
     },
     {
