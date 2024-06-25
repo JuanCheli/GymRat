@@ -29,6 +29,49 @@ router.get("/api/maquinas", async function (req, res, next) {
     return res.json({ Items: rows, RegistrosTotal: count });
 });
 
+router.get("/api/maquinas/filtro", async function (req, res, next) {
+    // #swagger.tags = ['maquinas']
+    // #swagger.summary = 'Obtiene Máquinas con filtros'
+    // #swagger.parameters['Nombre'] = { description: 'Parte del nombre de la Máquina' }
+    // #swagger.parameters['Activo'] = { description: 'Estado de la máquina (true o false)' }
+    // #swagger.parameters['Pagina'] = { description: 'Número de página' }
+    try {
+        const { Nombre, Pagina } = req.query;
+        const page = Pagina ? parseInt(Pagina, 10) : 1;
+        const limit = 10; // Número de registros por página
+        const offset = (page - 1) * limit;
+
+        let whereClause = {};
+
+        if (Nombre) {
+            whereClause.Nombre = { [Op.like]: `%${Nombre}%` };
+        }
+
+        const items = await db.Maquina.findAndCountAll({
+            attributes: [
+                "IdMaquina",
+                "Nombre",
+                "Gimnasio",
+                "Proveedor",
+                "FechaCreacion",
+                "Eliminado",
+            ],
+            where: whereClause,
+            limit: limit,
+            offset: offset
+        });
+
+        res.json({
+            totalItems: items.count,
+            items: items.rows,
+            currentPage: page,
+            totalPages: Math.ceil(items.count / limit)
+        });
+    } catch (error) {
+        next(error);
+    }
+});
+
 router.get("/api/maquinas/:id", async function (req, res, next) {
     // #swagger.tags = ['maquinas']
     // #swagger.summary = 'obtiene un Articulo'
@@ -46,6 +89,9 @@ router.get("/api/maquinas/:id", async function (req, res, next) {
     });
     res.json(items);
 });
+
+
+
 
 router.post("/api/maquinas/", async (req, res) => {
     // #swagger.tags = ['maquinas']

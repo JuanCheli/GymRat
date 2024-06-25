@@ -13,8 +13,6 @@ app.get("/", (req, res) => {
   res.send("Backend GymRat inicializado!");
 });
 
-const gimnasiomockRouter = require("./routes/gimnasiomock");
-app.use(gimnasiomockRouter);
 
 const gimnasioRouter = require("./routes/gimnasios");
 app.use(gimnasioRouter);

@@ -24,22 +24,22 @@ describe("POST /api/login admin", function () {
   });
 });
 
-describe("GET /api/articulosJWT", () => {
+describe("GET /api/maquinasJWT", () => {
 
   it("Devolveria error, porque falta token de autorización", async function () {
-    const res = await request(app).get("/api/articulosJWT");
+    const res = await request(app).get("/api/maquinasJWT");
     expect(res.statusCode).toEqual(401);
     expect(res.body.message).toEqual("Acceso denegado");
   });
 
   it("Devolveria error, porque el token no es válido", async function () {
-    const res = await request(app).get("/api/articulosJWT")
+    const res = await request(app).get("/api/maquinasJWT")
     .set("Authorization", 'Bearer invalido');
     expect(res.statusCode).toEqual(403);
     expect(res.body.message).toEqual("token no es valido");
   });
 
-  it("Devolvería todos los articulos, solo autorizado para administradores", async function () {
+  it("Devolvería todos los maquinas, solo autorizado para administradores", async function () {
     const res1 = await request(app)
     .post("/api/login")
     .set("Content-type", "application/json")
@@ -48,21 +48,19 @@ describe("GET /api/articulosJWT", () => {
     let token = res1.body.accessToken;
 
     const res = await request(app)
-      .get("/api/articulosJWT")
+      .get("/api/maquinasJWT")
       .set("Authorization", `Bearer ${token}`);
 
     expect(res.statusCode).toEqual(200);
     expect(res.body).toEqual(
       expect.arrayContaining([
         expect.objectContaining({
-          IdArticulo: expect.any(Number),
+          IdMaquina: expect.any(Number),
           Nombre: expect.any(String),
-          Precio: expect.any(Number),
-          CodigoDeBarra: expect.any(String),
-          IdArticuloFamilia: expect.any(Number),
-          Stock: expect.any(Number),
-          FechaAlta: expect.any(String),
-          Activo: expect.any(Boolean),
+          Gimnasio: expect.any(Number),
+          Proveedor: expect.any(Number),
+          FechaCreacion: expect.any(String),
+          Eliminado: expect.any(Boolean)
         }),
       ])
     );
@@ -77,7 +75,7 @@ describe("GET /api/articulosJWT", () => {
     let token = res1.body.accessToken;
 
     const res = await request(app)
-      .get("/api/articulosJWT")
+      .get("/api/maquinasJWT")
       .set("Authorization", `Bearer ${token}`);
 
     expect(res.statusCode).toEqual(403);

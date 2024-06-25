@@ -10,5 +10,21 @@ router.get("/api/gimnasios", async function (req, res, next) {
   res.json(data);
 });
 
+router.get("/api/gimnasios/:id", async function (req, res, next) {
+  // #swagger.tags = ['maquinas']
+  // #swagger.summary = 'obtiene un Articulo'
+  // #swagger.parameters['id'] = { description: 'identificador del Articulo...' }
+  let items = await db.Maquina.findOne({
+      attributes: [
+          "IdGimnasio",
+          "Nombre",
+          "FechaAlta",
+      ],
+      where: { IdGimnasio: req.params.id },
+  });
+  res.json(items);
+});
+
+
 
 module.exports = router;
