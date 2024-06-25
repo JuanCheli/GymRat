@@ -1,19 +1,16 @@
-// configurar ORM sequelize
 const { Sequelize, DataTypes } = require("sequelize");
-//const sequelize = new Sequelize("sqlite:" + process.env.base );
-const sequelize = new Sequelize("sqlite:" + "./.data/pymes.db");
+const sequelize = new Sequelize("sqlite:" + "./.data/sistema.db");
 
-// definicion del modelo de datos
-const articulosfamilias = sequelize.define(
-    "articulosfamilias",
+// Definición del modelo de Gimnasio
+const Gimnasio = sequelize.define(
+    "Gimnasio",
     {
-        IdArticuloFamilia: {
+        IdGimnasio: {
             type: DataTypes.INTEGER,
             primaryKey: true,
             autoIncrement: true,
         },
         Nombre: {
-            // todo evitar que string autocomplete con espacios en blanco, debería ser varchar sin espacios
             type: DataTypes.STRING(30),
             allowNull: false,
             validate: {
@@ -23,29 +20,63 @@ const articulosfamilias = sequelize.define(
                 },
                 len: {
                     args: [5, 30],
-                    msg: "Nombre debe ser tipo caracteres, entre 5 y 30 de longitud",
+                    msg: "Nombre debe ser entre 5 y 30 caracteres",
                 },
             },
         },
+        FechaAlta: {
+            type: DataTypes.STRING,
+            allowNull: true,
+        },
     },
     {
-        // pasar a mayusculas
         hooks: {
-            beforeValidate: function (articulofamilia, options) {
-                if (typeof articulofamilia.Nombre === "string") {
-                    articulofamilia.Nombre = articulofamilia.Nombre.toUpperCase().trim();
+            beforeValidate: function (gimnasios, options) {
+                if (typeof gimnasios.Nombre === "string") {
+                    gimnasios.Nombre = gimnasios.Nombre.toUpperCase().trim();
                 }
             },
         },
-
         timestamps: false,
     }
 );
 
-const articulos = sequelize.define(
-    "articulos",
+// Definición del modelo de Proveedor
+const Proveedor = sequelize.define(
+    "Proveedor",
     {
-        IdArticulo: {
+        IdProveedor: {
+            type: DataTypes.INTEGER,
+            primaryKey: true,
+            autoIncrement: true,
+        },
+        Nombre: {
+            type: DataTypes.STRING,
+            allowNull: false,
+        },
+        Pais: {
+            type: DataTypes.STRING,
+            allowNull: false,
+        },
+        Telefono: {
+            type: DataTypes.STRING,
+            allowNull: false,
+        },
+        FechaAltaEmpresa: {
+            type: DataTypes.STRING,
+            allowNull: true,
+        },
+    },
+    {
+        timestamps: false,
+    }
+);
+
+// Definición del modelo de Maquinas
+const Maquina = sequelize.define(
+    "Maquina",
+    {
+        IdMaquina: {
             type: DataTypes.INTEGER,
             primaryKey: true,
             autoIncrement: true,
@@ -60,95 +91,82 @@ const articulos = sequelize.define(
                 },
                 len: {
                     args: [5, 60],
-                    msg: "Nombre debe ser tipo caracteres, entre 5 y 60 de longitud",
+                    msg: "Nombre debe ser entre 5 y 60 caracteres",
                 },
             },
             unique: {
                 args: true,
-                msg: "este Nombre ya existe en la tabla!",
+                msg: "Este nombre ya existe en la tabla!",
             },
         },
-        Precio: {
-            type: DataTypes.DECIMAL(10, 2),
+        Gimnasio: {
+            type: DataTypes.INTEGER,
             allowNull: false,
-            validate: {
-                notNull: {
-                    args: true,
-                    msg: "Precio es requerido",
-                }
-            }
-        },
-        CodigoDeBarra: {
-            type: DataTypes.STRING(13),
-            allowNull: false,
-            validate: {
-                notNull: {
-                    args: true,
-                    msg: "Codigo De Barra es requerido",
-                },
-                is: {
-                    args: ["^[0-9]{13}$", "i"],
-                    msg: "Codigo de Barra debe ser numérico de 13 digitos",
-                },
+            references: {
+                model: Gimnasio,
+                key: 'IdGimnasio',
             },
         },
-        IdArticuloFamilia: {
+        Proveedor: {
             type: DataTypes.INTEGER,
             allowNull: false,
-            validate: {
-                notNull: {
-                    args: true,
-                    msg: "IdArticuloFamilia es requerido",
-                }
-            }
+            references: {
+                model: Proveedor,
+                key: 'IdProveedor',
+            },
         },
-        Stock: {
-            type: DataTypes.INTEGER,
-            allowNull: false,
-            validate: {
-                notNull: {
-                    args: true,
-                    msg: "Stock es requerido",
-                }
-            }
-        },
-        FechaAlta: {
+        FechaCreacion: {
             type: DataTypes.STRING,
             allowNull: false,
-            validate: {
-                notNull: {
-                    args: true,
-                    msg: "Fecha Alta es requerido",
-                }
-            }
-        },
-        Activo: {
-            type: DataTypes.BOOLEAN,
-            allowNull: false,
-            validate: {
-                notNull: {
-                    args: true,
-                    msg: "Activo es requerido",
-                }
-            }
         },
     },
     {
-        // pasar a mayusculas
         hooks: {
-            beforeValidate: function (articulo, options) {
-                if (typeof articulo.Nombre === "string") {
-                    articulo.Nombre = articulo.Nombre.toUpperCase().trim();
+            beforeValidate: function (maquina, options) {
+                if (typeof maquina.Nombre === "string") {
+                    maquina.Nombre = maquina.Nombre.toUpperCase().trim();
                 }
             },
         },
+        timestamps: false,
+    }
+);
 
+// Definición del modelo de Inscriptos
+const Inscripto = sequelize.define(
+    "Inscripto",
+    {
+        IdInscripto: {
+            type: DataTypes.INTEGER,
+            primaryKey: true,
+            autoIncrement: true,
+        },
+        Nombre: {
+            type: DataTypes.STRING,
+            allowNull: false,
+        },
+        FechaInscripcion: {
+            type: DataTypes.STRING,
+            allowNull: false,
+        },
+        Gimnasio: {
+            type: DataTypes.INTEGER,
+            allowNull: false,
+            references: {
+                model: Gimnasio,
+                key: 'IdGimnasio',
+            },
+        },
+    },
+    {
         timestamps: false,
     }
 );
 
 module.exports = {
     sequelize,
-    articulosfamilias,
-    articulos,
+    Gimnasio,
+    Proveedor,
+    Maquina,
+    Inscripto,
 };

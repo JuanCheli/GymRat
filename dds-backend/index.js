@@ -16,6 +16,10 @@ app.get("/", (req, res) => {
 const gimnasiomockRouter = require("./routes/gimnasiomock");
 app.use(gimnasiomockRouter);
 
+const gimnasioRouter = require("./routes/gimnasios");
+app.use(gimnasioRouter);
+
+
 
 // Levantar servidor
 if (!module.parent) {   // si no es llamado por otro módulo, es decir, si es el módulo principal -> levantamos el servidor
