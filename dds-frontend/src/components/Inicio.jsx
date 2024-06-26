@@ -12,7 +12,7 @@ function Inicio() {
           </h1>
           <p className="inicio-container-desc display-5 text-neutral-500 max-w-lg mx-auto my-2 text-sm text-center relative z-10">
             Información sobre gimnasios, máquinas, proveedores e inscriptos
-          </p>
+          </p> <br />
           <div className="text-center mt-8">
             <Link to="/gimnasios">
               <button class="button-64 boton-gimnasios" role="button">
