@@ -22,8 +22,8 @@ function Menu() {
     <nav className="navbar navbar-dark bg-dark navbar-expand-md">
       <div className="container-fluid">
         <a className="navbar-brand" href="#!">
-          <i className="fa fa-industry"></i>
-          &nbsp;<i>Pymes</i>
+          <i className="fa fa-dumbbell"></i>
+          <i> Gymrat</i>
         </a>
         <button
           className="navbar-toggler"
@@ -45,12 +45,17 @@ function Menu() {
             </li>
             <li className="nav-item">
               <NavLink className="nav-link" to="/articulosfamilias">
-                Articulos Familias
+                Gimnasios
               </NavLink>
             </li>
             <li className="nav-item">
               <NavLink className="nav-link" to="/articulos">
-                Articulos
+                Maquinas
+              </NavLink>
+            </li>
+            <li className="nav-item">
+              <NavLink className="nav-link" to="/articulos">
+                Proveedores
               </NavLink>
             </li>
             <li className="nav-item">
@@ -59,10 +64,9 @@ function Menu() {
                 title="exclusivo para administradores"
                 to="/articulosjwt"
               >
-                Articulos JWT
+                Inscriptos
               </NavLink>
             </li>
-
             <li className="nav-item dropdown bg-dark">
               <a
                 className="nav-link dropdown-toggle"
@@ -72,7 +76,7 @@ function Menu() {
                 data-bs-toggle="dropdown"
                 aria-expanded="false"
               >
-                Informes
+                Asesoramiento
               </a>
               <ul
                 className="dropdown-menu dropdown-menu-dark"
@@ -80,20 +84,17 @@ function Menu() {
               >
                 <li>
                   <a className="dropdown-item" href="#!">
-                    Ventas
+                    Planes alimenticios
                   </a>
                 </li>
                 <li>
                   <a className="dropdown-item  dropdown-menu-dark" href="#!">
-                    Compras
+                    Planes de entrenamiento
                   </a>
                 </li>
                 <li>
-                  <hr className="dropdown-divider" />
-                </li>
-                <li>
                   <a className="dropdown-item  dropdown-menu-dark" href="#!">
-                    Libro de IVA
+                    Suplementacion
                   </a>
                 </li>
               </ul>
@@ -104,7 +105,7 @@ function Menu() {
             {usuarioLogueado && (
               <li className="nav-item">
                 <a className="nav-link" href="#!">
-                  Bienvenido: {usuarioLogueado}
+                  ¡Bienvenido: {usuarioLogueado}!
                 </a>
               </li>
             )}

@@ -109,8 +109,10 @@
 /* ESTILOS FOOTER */
 
 .footer-container {
-  background: black;
+  background: #000;
   color: #333;
   font-size:large;
   font-weight: 400;
+  height: 100% !important;
 }
+

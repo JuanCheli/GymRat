@@ -30,7 +30,7 @@ function Footer() {
         <a
           className="redes"
           style={{ backgroundColor: "#ec4c51" }}
-          href="https://www.instagram.com"
+          href="https://www.instagram.com/martinmarengo7/"
           target="_blank"
         >
           <i title="Instagram" className="fab fa-instagram"></i>
