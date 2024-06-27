@@ -127,8 +127,14 @@ body {
 }
 
 /* ESTILOS NAV */
+
+header {
+  background-color: #000;
+  z-index: 1000;
+}
+
 .navbar {
-  background:#484848;
+  background: #484848;
   min-height: 4em;
 }
 
@@ -138,6 +144,73 @@ body {
   font-optical-sizing: auto;
   font-weight: bold;
 }
+
+.bg-nav {
+  background-color: #000 !important;
+  color: #fff
+}
+
+nav {
+  max-width: 960px;
+  background-color: #000;
+  margin: 0 auto;
+  padding: 60px 0;
+}
+
+nav ul {
+  text-align: center;
+  box-shadow: 0 0 25px rgba(0, 0, 0, 0.1), inset 0 0 1px rgba(255, 255, 255, 0.6);
+}
+
+nav ul li {
+  display: inline-block;
+  position: relative;
+}
+
+nav ul li a {
+  padding: 18px;
+  text-transform: uppercase;
+  color: rgba(0, 35, 122, 0.5);
+  font-size: 18px;
+  text-decoration: none;
+  display: block;
+}
+
+nav ul li a:hover {
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1), inset 0 0 1px rgba(255, 255, 255, 0.6);
+  background: rgba(255, 255, 255, 0.1);
+  color: rgba(0, 35, 122, 0.7);
+}
+
+nav ul li ul {
+  display: none;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  background: #484848;
+  box-shadow: 0 0 25px rgba(0, 0, 0, 0.1), inset 0 0 1px rgba(255, 255, 255, 0.6);
+  z-index: 1000;
+}
+
+nav ul li:hover ul {
+  display: block;
+}
+
+nav ul li ul li {
+  display: block;
+  
+}
+
+nav ul li ul li a {
+  padding: 10px 18px;
+  font-size: 16px;
+}
+
+nav ul li ul li a:hover {
+  background: rgba(255, 255, 255, 0.1);
+  color: rgba(0, 35, 122, 0.7);
+}
+
 
 
 /* ESTILOS TABLAS */

@@ -19,11 +19,12 @@ function Menu() {
   }, []);
 
   return (
-    <nav className="navbar sticky-top navbar-dark bg-dark navbar-expand-md">
-      <div className="container-fluid">
+    <header>
+    <nav className="navbar sticky-top bg-nav navbar-expand-md">
+      <div className="container-fluid navbar-dark">
         <a className="navbar-brand" href="#!">
           <i className="fa fa-dumbbell"></i>
-          <i> Gymrat</i>
+          <i> GymRat</i>
         </a>
         <button
           className="navbar-toggler"
@@ -67,7 +68,7 @@ function Menu() {
                 Inscriptos
               </NavLink>
             </li>
-            <li className="nav-item dropdown bg-dark">
+            <li className="nav-item dropdown">
               <a
                 className="nav-link dropdown-toggle"
                 href="#!"
@@ -127,6 +128,7 @@ function Menu() {
         </div>
       </div>
     </nav>
+    </header>
   );
 }
 export { Menu };
