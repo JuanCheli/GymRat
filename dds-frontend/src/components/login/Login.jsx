@@ -15,13 +15,10 @@ function Login() {
   };
 
   const handleIngresar = async () => {
-    //AuthService.login(usuario, clave, navigate);
     AuthService.login(usuario, clave, navigateToComponent);
   };
 
   useEffect(() => {
-    // lo primero que hacemos al ingresar al login es desloguearnos
-    // borrando los datos de sessionStorage y el state usuarioLogueado
     AuthService.logout();
   });
 
@@ -32,13 +29,12 @@ function Login() {
           <form className="p-5">
             <img
               className="mb-4"
-              src="https://getbootstrap.com/docs/5.2/assets/brand/bootstrap-logo.svg"
+              src="https://i.pinimg.com/originals/1c/03/26/1c0326e1f7aa89855ab1677bd023f0ff.png"
               alt=""
               width="72"
-              height="57"
+              height="72"
             />
-            <h1 className="h3 mb-3 fw-normal">Por favor ingrese</h1>
-
+            <h1 className="h4 mb-3 fw-normal">Por favor ingrese su cuenta</h1>
             <div className="form-floating">
               <input
                 type="text"
@@ -65,7 +61,7 @@ function Login() {
                 id="clave"
               />
               <label className="custom-control" htmlFor="clave">
-                Clave
+                Contraseña
               </label>
             </div>
 

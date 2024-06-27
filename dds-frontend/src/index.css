@@ -5,6 +5,15 @@
   box-sizing: border-box;
 }
 
+body {
+  margin: 0;
+  background-color: #000;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
 .container {
   position: relative;
   height: 400px;
@@ -113,6 +122,20 @@
   color: #333;
   font-size:large;
   font-weight: 400;
-  height: 100% !important;
+  margin-top:auto;
 }
+
+/* ESTILOS NAV */
+.navbar {
+  background:#484848;
+  min-height: 4em;
+}
+
+.container-fluid {
+  margin-bottom: auto;
+  font-family: "Exo 2", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: bold;
+}
+
 

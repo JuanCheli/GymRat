@@ -6,7 +6,7 @@ import { Menu } from "./components/Menu";
 import { Footer } from "./components/Footer";
 
 import { Articulos } from "./components/Articulos";
-import { ArticulosFamilias } from "./components/ArticulosFamilias";
+import { Gimnasios } from "./components/Gimnasios";
 
 import { ModalDialog } from "./components/ModalDialog";
 
@@ -23,7 +23,7 @@ function App() {
         <div className="divBody">
           <Routes>
             <Route path="/inicio" element={<Inicio />} />
-            <Route path="/articulosfamilias" element={<ArticulosFamilias />} />
+            <Route path="/gimnasios" element={<Gimnasios />} />
             <Route path="/articulos" element={<Articulos />} />
             <Route
               path="/articulosjwt"

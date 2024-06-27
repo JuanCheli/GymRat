@@ -10,19 +10,19 @@
   margin-bottom: 0.5em;
 }
 body {
-  background-color: rgb(241, 243, 247);
+  background-color: #000;
 }
 
 .divBody {
   background-color: #000;
-  min-height: 75vh;
+  min-height: 88vh;
   padding: 1rem;
 }
 
-/* pie de la pagina */
 footer {
   padding: 1rem;
 }
+
 .navbar-brand {
   color: aquamarine;
   font-size: 1.5rem;
