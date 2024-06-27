@@ -19,7 +19,7 @@ function Menu() {
   }, []);
 
   return (
-    <nav className="navbar navbar-dark bg-dark navbar-expand-md">
+    <nav className="navbar sticky-top navbar-dark bg-dark navbar-expand-md">
       <div className="container-fluid">
         <a className="navbar-brand" href="#!">
           <i className="fa fa-dumbbell"></i>
@@ -116,11 +116,11 @@ function Menu() {
                 >
                   <i
                     className={
-                      usuarioLogueado ? "fa fa-sign-out" : "fa fa-sign-in"
+                      usuarioLogueado ? "fa-solid fa-right-from-bracket" : "fa-solid fa-user"
                     }
                   ></i>
                 </span>
-                {usuarioLogueado ? " Logout" : " Login"}
+                {usuarioLogueado ? " Sign Out" : " Sign in"}
               </NavLink>
             </li>
           </ul>
