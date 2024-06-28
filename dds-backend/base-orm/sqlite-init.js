@@ -91,9 +91,10 @@ async function CrearBaseSiNoExiste() {
       `CREATE table maquinas( 
         IdMaquina INTEGER PRIMARY KEY AUTOINCREMENT,
         Nombre text NOT NULL UNIQUE,
-        Gimnasio INTEGER,
-        Proveedor INTEGER,
+        IdGimnasio INTEGER,
+        IdProveedor INTEGER,
         FechaCreacion text,
+        ConStock BOOLEAN DEFAULT 1,
         Eliminado BOOLEAN DEFAULT 0,
         FOREIGN KEY (Gimnasio) REFERENCES gimnasios(IdGimnasio),
         FOREIGN KEY (Proveedor) REFERENCES proveedor(IdProveedor)
@@ -144,7 +145,7 @@ async function CrearBaseSiNoExiste() {
         IdInscripto INTEGER PRIMARY KEY AUTOINCREMENT,
         Nombre text NOT NULL,
         FechaInscripcion text NOT NULL,
-        Gimnasio INTEGER,
+        IdGimnasio INTEGER,
         Eliminado BOOLEAN DEFAULT 0,
         FOREIGN KEY (Gimnasio) REFERENCES gimnasios(IdGimnasio)
       );`

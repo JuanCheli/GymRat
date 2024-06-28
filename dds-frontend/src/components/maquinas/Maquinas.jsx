@@ -1,13 +1,12 @@
 import React, { useState, useEffect } from "react";
 import moment from "moment";
-import ArticulosBuscar from "./ArticulosBuscar";
-import ArticulosListado from "./ArticulosListado";
-import ArticulosRegistro from "./ArticulosRegistro";
-import { articulosService } from "../services/articulos.services";
-import { articulosFamiliasService } from "../services/articulosFamilias.services";
-import modalDialogService from "../services/modalDialog.services";
+import MaquinasBuscar from "./MaquinasBuscar";
+import MaquinasListado from "./MaquinasListado";
+import MaquinasRegistro from "./MaquinasRegistro";
+import { maquinasService } from "../../services/maquinas.services";
+import modalDialogService from "../../services/modalDialog.services";
 
-function Articulos() {
+function Maquinas() {
   const TituloAccionABMC = {
     A: "(Agregar)",
     B: "(Eliminar)",
@@ -18,34 +17,33 @@ function Articulos() {
   const [AccionABMC, setAccionABMC] = useState("L");
 
   const [Nombre, setNombre] = useState("");
-  const [Activo, setActivo] = useState("");
+  const [ConStock, setConStock] = useState("");
 
   const [Items, setItems] = useState(null);
-  const [Item, setItem] = useState(null); // usado en BuscarporId (Modificar, Consultar)
+  const [Item, setItem] = useState(null); 
   const [RegistrosTotal, setRegistrosTotal] = useState(0);
   const [Pagina, setPagina] = useState(1);
   const [Paginas, setPaginas] = useState([]);
-  const [ArticulosFamilias, setArticulosFamilias] = useState(null);
+  const [Maquinas, setMaquinas] = useState(null);
 
-  // cargar al "montar" el componente, solo la primera vez (por la dependencia [])
+
   useEffect(() => {
-    async function BuscarArticulosFamilas() {
-      let data = await articulosFamiliasService.Buscar();
-      setArticulosFamilias(data);
+    async function BuscarMaquinas() {
+      let data = await maquinasService.Buscar();
+      setMaquinas(data);
     }
-    BuscarArticulosFamilas();
+    BuscarMaquinas();
   }, []);
 
   async function Buscar(_pagina) {
     if (_pagina && _pagina !== Pagina) {
       setPagina(_pagina);
     }
-    // OJO Pagina (y cualquier estado...) se actualiza para el proximo render, para buscar usamos el parametro _pagina
     else {
       _pagina = Pagina;
     }
     modalDialogService.BloquearPantalla(true);
-    const data = await articulosService.Buscar(Nombre, Activo, _pagina);
+    const data = await maquinasService.Buscar(Nombre, Activo, _pagina);
     modalDialogService.BloquearPantalla(false);
 
     setItems(data.Items);
@@ -60,36 +58,34 @@ function Articulos() {
   }
 
   async function BuscarPorId(item, accionABMC) {
-    const data = await articulosService.BuscarPorId(item);
+    const data = await maquinasService.BuscarPorId(item);
     setItem(data);
     setAccionABMC(accionABMC);
   }
 
   function Consultar(item) {
-    BuscarPorId(item, "C"); // paso la accionABMC pq es asincrono la busqueda y luego de ejecutarse quiero cambiar el estado accionABMC
+    BuscarPorId(item, "C");
   }
 
   function Modificar(item) {
     if (!item.Activo) {
-      modalDialogService.Alert("No puede modificarse un registro Inactivo.");
+      modalDialogService.Alert("No puede modificarse una máquina sin stock.");
       return;
     }
-    BuscarPorId(item, "M"); // paso la accionABMC pq es asincrono la busqueda y luego de ejecutarse quiero cambiar el estado accionABMC
+    BuscarPorId(item, "M"); 
   }
 
   async function Agregar() {
     setAccionABMC("A");
     setItem({
-      IdArticulo: 0,
+      IdMaquina: 0,
       Nombre: "",
-      Precio: "",
-      Stock: "",
-      CodigoDeBarra: "",
-      IdArticuloFamilia: "",
-      FechaAlta: moment(new Date()).format("YYYY-MM-DD"),
+      Gimnasio: 0,
+      Proveedor: 0,
+      FechaCreacion: moment(new Date()).format("YYYY-MM-DD"),
       Activo: true,
     });
-    alert("preparando el Alta...");
+    alert("preparando el alta...");
     console.log(Item);
   }
 
@@ -97,25 +93,24 @@ function Articulos() {
     alert("En desarrollo...");
   }
 
-  async function ActivarDesactivar(item) {
+  async function ActivarDesactivarStock(item) {
     modalDialogService.Confirm(
       "Esta seguro que quiere " +
-        (item.Activo ? "desactivar" : "activar") +
+        (item.ConStock ? "registrar como sin stock" : "registrar como con stock") +
         " el registro?",
       undefined,
       undefined,
       undefined,
       async () => {
-        await articulosService.ActivarDesactivar(item);
+        await maquinasService.ActivarDesactivarStock(item);
         await Buscar();
       }
     );
   }
 
   async function Grabar(item) {
-    // agregar o modificar
     try {
-      await articulosService.Grabar(item);
+      await maquinasService.Grabar(item);
     } catch (error) {
       alert(error?.response?.data?.message ?? error.toString());
       return;
@@ -125,8 +120,8 @@ function Articulos() {
 
     setTimeout(() => {
       alert(
-        "Registro " +
-          (AccionABMC === "A" ? "agregado" : "modificado") +
+        "Maquina " +
+          (AccionABMC === "A" ? "agregada" : "modificada") +
           " correctamente."
       );
     }, 0);
@@ -140,15 +135,15 @@ function Articulos() {
   return (
     <div>
       <div className="tituloPagina">
-        Articulos <small>{TituloAccionABMC[AccionABMC]}</small>
+        Maquinas <small>{TituloAccionABMC[AccionABMC]}</small>
       </div>
 
       {AccionABMC === "L" && (
-        <ArticulosBuscar
+        <MaquinasBuscar
           Nombre={Nombre}
           setNombre={setNombre}
-          Activo={Activo}
-          setActivo={setActivo}
+          ConStock={ConStock}
+          setConStock={setConStock}
           Buscar={Buscar}
           Agregar={Agregar}
         />
@@ -156,12 +151,12 @@ function Articulos() {
 
       {/* Tabla de resutados de busqueda y Paginador */}
       {AccionABMC === "L" && Items?.length > 0 && (
-        <ArticulosListado
+        <MaquinasListado
           {...{
             Items,
             Consultar,
             Modificar,
-            ActivarDesactivar,
+            ActivarDesactivarStock,
             Imprimir,
             Pagina,
             RegistrosTotal,
@@ -174,17 +169,17 @@ function Articulos() {
       {AccionABMC === "L" && Items?.length === 0 && (
         <div className="alert alert-info mensajesAlert">
           <i className="fa fa-exclamation-sign"></i>
-          No se encontraron registros...
+          No se encontraron maquinas...
         </div>
       )}
 
       {/* Formulario de alta/modificacion/consulta */}
       {AccionABMC !== "L" && (
-        <ArticulosRegistro
-          {...{ AccionABMC, ArticulosFamilias, Item, Grabar, Volver }}
+        <MaquinasRegistro
+          {...{ AccionABMC, Gimnasios, Proveedores, Item, Grabar, Volver }}
         />
       )}
     </div>
   );
 }
-export { Articulos };
+export { Maquinas };

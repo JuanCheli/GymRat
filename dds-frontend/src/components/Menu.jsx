@@ -50,12 +50,12 @@ function Menu() {
               </NavLink>
             </li>
             <li className="nav-item">
-              <NavLink className="nav-link" to="/articulos">
+              <NavLink className="nav-link" to="/maquinas">
                 Maquinas
               </NavLink>
             </li>
             <li className="nav-item">
-              <NavLink className="nav-link" to="/articulos">
+              <NavLink className="nav-link" to="/proveedores">
                 Proveedores
               </NavLink>
             </li>
@@ -63,7 +63,7 @@ function Menu() {
               <NavLink
                 className="nav-link"
                 title="exclusivo para administradores"
-                to="/articulosjwt"
+                to="/inscriptos"
               >
                 Inscriptos
               </NavLink>
@@ -84,17 +84,17 @@ function Menu() {
                 aria-labelledby="navbarDropdown"
               >
                 <li>
-                  <a className="dropdown-item" href="#!">
+                  <a className="dropdown-item" href="https://www.menshealth.com/es/nutricion-dietetica/a35224821/dieta-fitness-15-alimentos/" target="_blank">
                     Planes alimenticios
                   </a>
                 </li>
                 <li>
-                  <a className="dropdown-item  dropdown-menu-dark" href="#!">
+                  <a className="dropdown-item  dropdown-menu-dark" href="https://www.myprotein.es/thezone/entrenamiento/" target="_blank">
                     Planes de entrenamiento
                   </a>
                 </li>
                 <li>
-                  <a className="dropdown-item  dropdown-menu-dark" href="#!">
+                  <a className="dropdown-item  dropdown-menu-dark" href="https://www.energyzone.com.ar/?gad_source=1&gclid=CjwKCAjwm_SzBhAsEiwAXE2Cv-RoIONtzNj9KAsgoenX4GKOoDdJ6ME9ESTBXx3Q3XntIWWCxu5LgxoCMcQQAvD_BwE" target="_blank">
                     Suplementacion
                   </a>
                 </li>
@@ -106,7 +106,7 @@ function Menu() {
             {usuarioLogueado && (
               <li className="nav-item">
                 <a className="nav-link" href="#!">
-                  ¡Bienvenido: {usuarioLogueado}!
+                  Bienvenido {usuarioLogueado}
                 </a>
               </li>
             )}
@@ -121,7 +121,7 @@ function Menu() {
                     }
                   ></i>
                 </span>
-                {usuarioLogueado ? " Sign Out" : " Sign in"}
+                {usuarioLogueado ? " Cerrar Sesión" : " Iniciar Sesión"}
               </NavLink>
             </li>
           </ul>

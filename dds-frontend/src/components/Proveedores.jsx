@@ -1,14 +1,14 @@
 import React, { useState, useEffect } from "react";
 import { GimnasiosMockService } from "../services/gimnasios-mock.services";
-function Gimnasios() {
-  const tituloPagina = "Gimnasios";
-  const [gimnasios, setGimnasios] = useState(null);
+function Proveedores() {
+  const tituloPagina = "Proveedores";
+  const [proveedores, setProveedores] = useState(null);
   useEffect(() => {
-    BuscarArticulosFamilas();
+    BuscarProveedores();
   }, []);
-  async function BuscarArticulosFamilas() {
+  async function BuscarProveedores() {
     let data = await GimnasiosMockService.Buscar();
-    setGimnasios(data);
+    setProveedores(data);
   }
   return (
     <section class="intro">
@@ -23,18 +23,22 @@ function Gimnasios() {
                     <table class="table table-dark table-bordered mb-0">
                       <thead>
                         <tr>
-                          <th style={{ width: "33%" }}>IdGimnasio</th>
-                          <th style={{ width: "33%" }}>Nombre</th>
-                          <th style={{ width: "33%" }}>FechaAlta</th>
+                          <th style={{ width: "20%" }}>IdProveedor</th>
+                          <th style={{ width: "20%" }}>Nombre</th>
+                          <th style={{ width: "20%" }}>Pais</th>
+                          <th style={{ width: "20%" }}>Telefono</th>
+                          <th style={{ width: "20%" }}>FechaAltaEmpresa</th>
                         </tr>
                       </thead>
                       <tbody>
-                        {gimnasios &&
-                          gimnasios.map((gimnasios) => (
-                            <tr key={gimnasios.IdGimnasio}>
-                              <td>{gimnasios.IdGimnasio}</td>
-                              <td>{gimnasios.Nombre}</td>
-                              <td>{gimnasios.FechaAlta}</td>
+                        {proveedores &&
+                          proveedores.map((proveedores) => (
+                            <tr key={proveedores.IdProveedor}>
+                              <td>{proveedores.IdProveedor}</td>
+                              <td>{proveedores.Nombre}</td>
+                              <td>{proveedores.Pais}</td>
+                              <td>{proveedores.Telefono}</td>
+                              <td>{proveedores.FechaAltaEmpresa}</td>
                             </tr>
                           ))}
                       </tbody>
@@ -49,4 +53,4 @@ function Gimnasios() {
     </section>
   );
 }
-export { Gimnasios };
+export { Proveedores };

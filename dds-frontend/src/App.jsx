@@ -5,12 +5,13 @@ import { Inicio } from "./components/Inicio";
 import { Menu } from "./components/Menu";
 import { Footer } from "./components/Footer";
 
-import { Articulos } from "./components/Articulos";
+import { Maquinas } from "./components/maquinas/Maquinas";
 import { Gimnasios } from "./components/Gimnasios";
+import { Proveedores } from "./components/Proveedores";
+import { Inscriptos } from "./components/inscriptos/Inscriptos";
 
 import { ModalDialog } from "./components/ModalDialog";
 
-import { ArticulosJWT } from "./components/articulosJWT/ArticulosJWT";
 import { RequireAuth } from "./components/RequiereAuth";
 import { Login } from "./components/login/Login";
 
@@ -24,12 +25,13 @@ function App() {
           <Routes>
             <Route path="/inicio" element={<Inicio />} />
             <Route path="/gimnasios" element={<Gimnasios />} />
-            <Route path="/articulos" element={<Articulos />} />
+            <Route path="/maquinas" element={<Maquinas/>} />
+            <Route path="/proveedores" element={<Proveedores/>} />
             <Route
-              path="/articulosjwt"
+              path="/inscriptos"
               element={
                 <RequireAuth>
-                  <ArticulosJWT />
+                  <Inscriptos/>
                 </RequireAuth>
               }
             />

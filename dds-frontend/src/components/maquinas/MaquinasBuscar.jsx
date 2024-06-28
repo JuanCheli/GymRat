@@ -1,9 +1,9 @@
 import React from "react";
-export default function ArticulosBuscar({
+export default function MaquinasBuscar({
   Nombre,
   setNombre,
-  Activo,
-  setActivo,
+  ConStock,
+  setConStock,
   Buscar,
   Agregar,
 }) {
@@ -25,13 +25,13 @@ export default function ArticulosBuscar({
             />
           </div>
           <div className="col-sm-4 col-md-2">
-            <label className="col-form-label">Activo:</label>
+            <label className="col-form-label">Hay Stock:</label>
           </div>
           <div className="col-sm-8 col-md-4">
             <select
               className="form-control"
-              onChange={(e) => setActivo(e.target.value)}
-              value={Activo}
+              onChange={(e) => setConStock(e.target.value)}
+              value={ConStock}
             >
               <option value={""}></option>
               <option value={false}>NO</option>

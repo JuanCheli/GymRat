@@ -1,7 +1,4 @@
-body {
-  background-color: #000;
-  z-index:1000;
-}
+
 
 .divBody {
   background-color: #000;
@@ -13,10 +10,6 @@ footer {
   padding: 1rem;
 }
 
-.navbar-brand {
-  color: aquamarine;
-  font-size: 1.5rem;
-}
 
 .tituloPagina {
   font-size: 1.75rem;
@@ -30,35 +23,18 @@ footer {
   margin-bottom: 0.5em;
 }
 
-/* todos los formularios */
-form {
-  background-color: rgb(241, 243, 247);
-  border-radius: 0.5rem;
-  border-style: solid;
-  border-color: lightgrey;
-  border-width: thin;
-  margin: 0em 0.5rem 1rem 0.5rem;
-  padding: 0.5rem;
-  box-shadow: 0.62rem 0.62rem 0.31rem rgb(175, 173, 173);
-}
-
-/* espacio en los botones contenidos en un div con esta clase */
 .botones button {
   margin: 0em 0.5em 0.5em 0em;
 }
 
-/* todos los labels menos los de los radio y check */
 label:not([class^="custom-control"]) {
-  background-color: #d7dfe7;
   border-radius: 0.625em 0.2em 0rem 0.625em;
-  border-bottom: solid;
   margin-right: -0.9em; /* para que columna label este cerca del input*/
   padding-left: 0.5em;
   display: block;
   height: 90%;
 }
 
-/*<=576*/
 @media only screen and (max-width: 575px) {
   label:not([class^="custom-control"]) {
     margin-right: 0em;
@@ -66,7 +42,6 @@ label:not([class^="custom-control"]) {
   }
 }
 
-/*>=576*/
 @media only screen and (min-width: 576px) {
   .inputMedio {
     width: 12em;
@@ -74,6 +49,7 @@ label:not([class^="custom-control"]) {
   .inputChico {
     width: 7em;
   }
+
 }
 .pyBadge {
   background-color: #6c757d;
@@ -89,7 +65,7 @@ label:not([class^="custom-control"]) {
   border-radius: 0.25rem;
 }
 
-/* mensajes de validacion */
+
 .validacion {
   color: red;
   font-size: 0.8em;
@@ -98,9 +74,8 @@ label:not([class^="custom-control"]) {
   padding-bottom: 0.5em;
 }
 
-/* mensajes de alerta al buscar y grabar */
+
 .mensajesAlert {
-  /* color: #495057; */
   margin: 0rem 0.5rem 0rem 0.5rem;
 }
 
@@ -110,16 +85,13 @@ label:not([class^="custom-control"]) {
   margin-top: -1rem; /* para pegarlo a la tabla */
 }
 
-/* todos los input a mayusculas, y no sus placeholders*/
 input {
-  text-transform: uppercase;
-  /* margin-bottom: 0.2em;  */
-  /*separa renglones*/
+  margin-bottom: 0.2em
 }
 ::placeholder {
   text-transform: none;
 }
-/* redes al pie de pagina */
+
 .redes {
   background-color: blue;
   color: white;
@@ -127,3 +99,4 @@ input {
   margin: 0.3em;
   border-radius: 1em;
 }
+

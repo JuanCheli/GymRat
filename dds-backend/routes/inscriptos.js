@@ -5,7 +5,7 @@ const db = require("../base-orm/sequelize-init");
 
 router.get("/api/inscriptos", async function (req, res, next) {
   let data = await db.Inscripto.findAll({
-    attributes: ["Idinscripto", "Nombre", "FechaInscripcion", "Gimnasio"],
+    attributes: ["IdInscripto", "Nombre", "FechaInscripcion", "IdGimnasio"],
   });
   res.json(data);
 });
@@ -16,12 +16,12 @@ router.get("/api/inscriptos/:id", async function (req, res, next) {
   // #swagger.parameters['id'] = { description: 'identificador del Articulo...' }
   let items = await db.Inscripto.findOne({
     attributes: [
-      "Idinscripto",
+      "IdInscripto",
       "Nombre",
       "FechaInscripcion",
-      "Gimnasio",
+      "IdGimnasio",
     ],
-    where: { Idinscripto: req.params.id },
+    where: { IdInscripto: req.params.id },
   });
   res.json(items);
 });
@@ -70,9 +70,9 @@ router.put("/api/inscriptos/:id", async (req, res) => {
             "IdInscripto",
             "Nombre",
             "FechaInscripcion",
-            "Gimnasio",
+            "IdGimnasio",
           ],
-      where: { Idinscripto: req.params.id },
+      where: { IdInscripto: req.params.id },
     });
     if (!item) {
       res.status(404).json({ message: "inscripto No Encontrado" });
@@ -107,7 +107,7 @@ router.delete("/api/inscriptos/:id", async (req, res) => {
   if (bajaFisica) {
     // baja física
     let filasBorradas = await db.Inscripto.destroy({
-      where: { Idinscripto: req.params.id },
+      where: { IdInscripto: req.params.id },
     });
     if (filasBorradas == 1) res.sendStatus(200);
     else res.sendStatus(404);
@@ -115,9 +115,9 @@ router.delete("/api/inscriptos/:id", async (req, res) => {
     // baja lógica
     try {
       let data = await db.sequelize.query(
-        'UPDATE inscriptos SET eliminado = 1 WHERE Idinscripto = :Idinscripto',
+        'UPDATE inscriptos SET eliminado = 1 WHERE IdInscripto = :IdInscripto',
         {
-          replacements: { Idinscripto: req.params.id },
+          replacements: { IdInscripto: req.params.id },
           type: db.sequelize.QueryTypes.UPDATE,
         }
       );

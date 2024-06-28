@@ -6,7 +6,7 @@ async function BuscarPorId(IdGimnasio) {
     return arrayGimnasios.find((gimnasio) => gimnasio.IdGimnasio === IdGimnasio);
 }
 async function Agregar(gimnasio) {
-    gimnasio.IdGimnasio = arrayGimnasios.length + 1;  // simula autoincremental
+    gimnasio.IdGimnasio = arrayGimnasios.length + 1; 
     arrayGimnasios.push(gimnasio);
 }
 async function Modificar(gimnasio) {

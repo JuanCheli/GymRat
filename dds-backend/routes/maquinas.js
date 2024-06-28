@@ -50,9 +50,10 @@ router.get("/api/maquinas/filtro", async function (req, res, next) {
             attributes: [
                 "IdMaquina",
                 "Nombre",
-                "Gimnasio",
-                "Proveedor",
+                "IdGimnasio",
+                "IdProveedor",
                 "FechaCreacion",
+                "ConStock"
             ],
             where: whereClause,
             limit: limit,
@@ -78,9 +79,10 @@ router.get("/api/maquinas/:id", async function (req, res, next) {
         attributes: [
             "IdMaquina",
             "Nombre",
-            "Gimnasio",
-            "Proveedor",
+            "IdGimnasio",
+            "IdProveedor",
             "FechaCreacion",
+            "ConStock"
         ],
         where: { IdMaquina: req.params.id },
     });
@@ -135,9 +137,10 @@ router.put("/api/maquinas/:id", async (req, res) => {
             attributes: [
                 "IdMaquina",
                 "Nombre",
-                "Gimnasio",
-                "Proveedor",
+                "IdGimnasio",
+                "IdProveedor",
                 "FechaCreacion",
+                "ConStock",
                 "Eliminado",
             ],
             where: { IdMaquina: req.params.id },
@@ -227,9 +230,10 @@ router.get(
         attributes: [
             "IdMaquina",
             "Nombre",
-            "Gimnasio",
-            "Proveedor",
+            "IdGimnasio",
+            "IdProveedor",
             "FechaCreacion",
+            "ConStock",
             "Eliminado"
         ],
         order: [["Nombre", "ASC"]],

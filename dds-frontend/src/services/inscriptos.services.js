@@ -1,12 +1,12 @@
 import { config } from "../config";
 import httpService from "./http.services";
-const urlServidor = "https://labsys.frc.utn.edu.ar/dds-backend-2024"
-const urlResourceArticulos = urlServidor + "/api/articulosJWT";
+const urlServidor = "https://localhost:3000"
+const urlResourceInscriptos = urlServidor + "/api/inscriptos";
 
 
 
 
-const urlResource = urlResourceArticulos;
+const urlResource = urlResourceInscriptos;
 
 
 async function Buscar(Nombre, Activo, Pagina) {
@@ -18,25 +18,25 @@ async function Buscar(Nombre, Activo, Pagina) {
 
 
 async function BuscarPorId(item) {
-    const resp = await httpService.get(urlResource + "/" + item.IdArticulo);
+    const resp = await httpService.get(urlResource + "/" + item.IdInscripto);
     return resp.data;
 }
 
 
 async function ActivarDesactivar(item) {
-    await httpService.delete(urlResource + "/" + item.IdArticulo);
+    await httpService.delete(urlResource + "/" + item.IdInscripto);
 }
 
 
 async function Grabar(item) {
-    if (item.IdArticulo === 0) {
+    if (item.IdInscripto === 0) {
         await httpService.post(urlResource, item);
     } else {
-        await httpService.put(urlResource + "/" + item.IdArticulo, item);
+        await httpService.put(urlResource + "/" + item.IdInscripto, item);
     }
 }
 
 
-export const articulosJWTService = {
+export const InscriptosService = {
     Buscar, BuscarPorId, ActivarDesactivar, Grabar
 };

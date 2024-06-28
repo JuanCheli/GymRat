@@ -12,6 +12,7 @@ body {
   display: flex;
   flex-direction: column;
   min-height: 100vh;
+  z-index:1000;
 }
 
 .container {
@@ -218,17 +219,8 @@ nav ul li ul li a:hover {
   height: 50vh;
 }
 
-.gradient-custom-2 {
-  /* fallback for old browsers */
-  background: #6a11cb;
-
-  /* Chrome 10-25, Safari 5.1-6 */
-  background: -webkit-linear-gradient(to top, rgba(106, 17, 203, 1), rgba(37, 117, 252, 1));
-
-  /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-  background: linear-gradient(to top, rgba(106, 17, 203, 1), rgba(37, 117, 252, 1));
+.tabla {
   min-height: 80vh;
-  word-wrap: break-word;
 }
 
 table td,

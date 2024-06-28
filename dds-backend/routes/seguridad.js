@@ -5,12 +5,12 @@ const auth = require("../seguridad/auth");
 
 const users = [
   {
-    usuario: "admin",
+    usuario: "gimnasio",
     clave: "123",
     rol: "admin",
   },
   {
-    usuario: "juan",
+    usuario: "inscripto",
     clave: "123",
     rol: "member",
   },
@@ -18,8 +18,6 @@ const users = [
 let refreshTokens = [];
 
 router.post("/api/login", (req, res) => {
-  // #swagger.tags = ['Seguridad']
-  // #swagger.summary = 'Login de usuarios: admin:123(rol administrador), juan:123(rol miembro)'
 
   const { usuario, clave } = req.body;
 
