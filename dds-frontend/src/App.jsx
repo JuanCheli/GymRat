@@ -6,8 +6,8 @@ import { Menu } from "./components/Menu";
 import { Footer } from "./components/Footer";
 
 import { Maquinas } from "./components/maquinas/Maquinas";
-import { Gimnasios } from "./components/Gimnasios";
-import { Proveedores } from "./components/Proveedores";
+import { Gimnasios } from "./components/gimnasios/Gimnasios";
+import { Proveedores } from "./components/proveedores/Proveedores";
 import { Inscriptos } from "./components/inscriptos/Inscriptos";
 
 import { ModalDialog } from "./components/ModalDialog";

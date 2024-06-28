@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { GimnasiosMockService } from "../services/gimnasios-mock.services";
+import { GimnasiosMockService } from "../../services/gimnasios-mock.services";
 function Proveedores() {
   const tituloPagina = "Proveedores";
   const [proveedores, setProveedores] = useState(null);
