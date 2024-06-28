@@ -7,10 +7,6 @@ divbody {
   height: 80%;
 }
 
-.form-body {
-  top: 0;
-}
-
 .img-container {
   position: absolute;
   top: 10%; 
@@ -20,18 +16,17 @@ divbody {
 .form-holder {
   display: flex;
   flex-direction: column;
-  justify-content: center;
   align-items: center;
   text-align: center;
-  min-height: 100vh;
-  position: relative; /* Add this line */
+  min-height: 80vh;
+  position: relative;
 }
 
 .form-holder .form-content {
   position: relative;
   text-align: center;
   display: flex;
-  justify-content: center;
+
   align-items: center;
   padding: 60px;
 }

@@ -23,7 +23,7 @@ function Login() {
   });
 
   return (
-    <div className="form-body">
+    <div className="form-body top-0">
         <div className="form-holder">
           <div className="form-content">
             <div className="form-items">
