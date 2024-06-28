@@ -96,14 +96,14 @@ async function CrearBaseSiNoExiste() {
         FechaCreacion text,
         ConStock BOOLEAN DEFAULT 1,
         Eliminado BOOLEAN DEFAULT 0,
-        FOREIGN KEY (Gimnasio) REFERENCES gimnasios(IdGimnasio),
-        FOREIGN KEY (Proveedor) REFERENCES proveedor(IdProveedor)
+        FOREIGN KEY (IdGimnasio) REFERENCES gimnasios(IdGimnasio),
+        FOREIGN KEY (IdProveedor) REFERENCES proveedor(IdProveedor)
       );`
     );
     console.log("tabla maquinas creada!");
 
     await db.run(
-      `insert into maquinas (Nombre, Gimnasio, Proveedor, FechaCreacion) values
+      `insert into maquinas (Nombre, IdGimnasio, IdProveedor, FechaCreacion) values
       ('Banco pecho plano', 1, 1, '2023-01-19'),
       ('Máquina de sentadillas', 2, 2, '2023-02-10'),
       ('Bicicleta estática', 3, 3, '2023-03-15'),
@@ -147,13 +147,13 @@ async function CrearBaseSiNoExiste() {
         FechaInscripcion text NOT NULL,
         IdGimnasio INTEGER,
         Eliminado BOOLEAN DEFAULT 0,
-        FOREIGN KEY (Gimnasio) REFERENCES gimnasios(IdGimnasio)
+        FOREIGN KEY (IdGimnasio) REFERENCES gimnasios(IdGimnasio)
       );`
     );
     console.log("tabla inscriptos creada!");
 
     await db.run(
-      `insert into inscriptos (Nombre, FechaInscripcion, Gimnasio) values
+      `insert into inscriptos (Nombre, FechaInscripcion, IdGimnasio) values
       ('Carlos Perez', '2023-01-10', 1),
       ('Lucia Martinez', '2023-01-15', 2),
       ('Jose Gomez', '2023-02-10', 3),

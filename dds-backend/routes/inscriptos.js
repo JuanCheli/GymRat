@@ -2,6 +2,7 @@ const express = require("express");
 const router = express.Router();
 const { ValidationError } = require('sequelize');
 const db = require("../base-orm/sequelize-init");
+const auth = require("../seguridad/auth");
 
 router.get("/api/inscriptos", async function (req, res, next) {
   let data = await db.Inscripto.findAll({
@@ -38,7 +39,7 @@ router.post("/api/inscriptos/", async (req, res) => {
     let data = await db.Inscripto.create({
       Nombre: req.body.Nombre,
       FechaInscripcion: req.body.FechaInscripcion,
-      Gimnasio: req.body.Gimnasio,
+      IdGimnasio: req.body.IdGimnasio,
     });
     res.status(200).json(data.dataValues); // devolvemos el registro agregado!
   } catch (err) {
@@ -66,12 +67,12 @@ router.put("/api/inscriptos/:id", async (req, res) => {
 
   try {
     let item = await db.Inscripto.findOne({
-        attributes: [
-            "IdInscripto",
-            "Nombre",
-            "FechaInscripcion",
-            "IdGimnasio",
-          ],
+      attributes: [
+        "IdInscripto",
+        "Nombre",
+        "FechaInscripcion",
+        "IdGimnasio",
+      ],
       where: { IdInscripto: req.params.id },
     });
     if (!item) {
@@ -79,8 +80,8 @@ router.put("/api/inscriptos/:id", async (req, res) => {
       return;
     }
     item.Nombre = req.body.Nombre,
-    item.FechaInscripcion = req.body.FechaInscripcion,
-    item.Gimnasio = req.body.Gimnasio
+      item.FechaInscripcion = req.body.FechaInscripcion,
+      item.IdGimnasio = req.body.IdGimnasio
     await item.save();
     res.sendStatus(204);
 
@@ -134,5 +135,32 @@ router.delete("/api/inscriptos/:id", async (req, res) => {
     }
   }
 });
+
+//------------------------------------
+//-- SEGURIDAD ---------------------------
+//------------------------------------
+router.get(
+  "/api/inscriptosJWT",
+  auth.authenticateJWT,
+  async function (req, res, next) {
+    const { rol } = res.locals.user;
+    if (rol !== "admin") {
+      return res.status(403).json({ message: "Usuario no autorizado!" });
+    }
+
+    let items = await db.Inscripto.findAll({
+      attributes: [
+        "IdInscripto",
+        "Nombre",
+        "FechaInscripcion",
+        "IdGimnasio",
+      ],
+      order: [["Nombre", "ASC"]],
+    });
+    res.json(items);
+  }
+);
+
+
 
 module.exports = router;

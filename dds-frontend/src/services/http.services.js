@@ -31,16 +31,12 @@ httpService.interceptors.response.use(
     return response;
   },
   (error) => {
-    // loguear el error
     console.log("error en axios response ", error);
     modalService.BloquearPantalla(false);
 
-
     if (error.response.status === 401) {
-      // no auntenticado
       error.message = "debe loguearse para acceder a esta funcionalidad";
     } else if (error.response.status === 403) {
-      // no auntenticado
       error.message = "usuario no autorizado para acceder a esta funcionalidad";
     } else {
       error.message =
@@ -49,12 +45,8 @@ httpService.interceptors.response.use(
     }
     modalService.Alert(error.message);
 
-
     return Promise.reject(error);
 
-
-    //return error
-    //throw new Error(error?.response?.data?.Message ?? 'Ocurrio un error');
   }
 );
 

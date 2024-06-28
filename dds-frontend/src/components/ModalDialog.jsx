@@ -63,19 +63,19 @@ function ModalDialog() {
   switch (tipo) {
     case "success":
       classHeader = "bg-success";
-      faIcon = "fa-regular fa-circle-check";
+      faIcon = "fa-solid fa-thumbs-up";
       break;
     case "danger":
       classHeader = "bg-danger";
-      faIcon = "fa-solid fa-triangle-exclamation";
+      faIcon = "fa-solid fa-circle-exclamation";
       break;
     case "info":
       classHeader = "bg-info";
-      faIcon = "fa-solid fa-circle-info";
+      faIcon = "fa-solid fa--info";
       break;
     case "warning":
       classHeader = "bg-warning";
-      faIcon = "fa-solid fa-triangle-exclamation";
+      faIcon = "fa-regular fa-triangle-exclamation";
       break;
     default:
       classHeader = "bg-success";
@@ -103,12 +103,12 @@ function ModalDialog() {
           {mensaje === "BloquearPantalla" ? (
             <div className="progress">
               <div
-                className="progress-bar progress-bar-striped progress-bar-animated"
+                className="progress-bar"
                 role="progressbar"
                 aria-valuenow="100"
                 aria-valuemin="0"
                 aria-valuemax="100"
-                style={{ flex: 1 }}
+                style={{ flex: "1" }}
               ></div>
             </div>
           ) : (

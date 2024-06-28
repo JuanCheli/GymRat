@@ -36,8 +36,8 @@ if (!module.parent) {
     const port = process.env.PORT || 3000;   
     app.locals.fechaInicio = new Date();
     app.listen(port, () => {
-      console.log(`Sitio escuchando en el puerto ${port}`);
+      console.log(`Página inicializada en el puerto ${port}`);
     });
   }
-  module.exports = app; // para testing
+  module.exports = app;
   

@@ -2,7 +2,7 @@ const express = require("express");
 const router = express.Router();
 const db = require("../base-orm/sequelize-init");
 const { Op, ValidationError } = require("sequelize");
-const auth = require("../seguridad/auth");
+
 
 
 router.get("/api/maquinas", async function (req, res, next) {
@@ -103,8 +103,8 @@ router.post("/api/maquinas/", async (req, res) => {
     try {
         let data = await db.Maquina.create({
             Nombre: req.body.Nombre,
-            Gimnasio: req.body.Gimnasio,
-            Proveedor: req.body.Proveedor,
+            IdGimnasio: req.body.IdGimnasio,
+            IdProveedor: req.body.IdProveedor,
             FechaCreacion: req.body.FechaCreacion,
             Eliminado: req.body.Eliminado,
         });
@@ -150,8 +150,8 @@ router.put("/api/maquinas/:id", async (req, res) => {
             return;
         }
         item.Nombre = req.body.Nombre,
-        item.Gimnasio = req.body.Gimnasio,
-        item.Proveedor = req.body.Proveedor,
+        item.IdGimnasio = req.body.IdGimnasio,
+        item.IdProveedor = req.body.IdProveedor,
         item.FechaCreacion = req.body.FechaCreacion,
         item.Eliminado = req.body.Eliminado,
         await item.save();
@@ -207,40 +207,5 @@ router.delete("/api/maquinas/:id", async (req, res) => {
         }
     }
 });
-
-//------------------------------------
-//-- SEGURIDAD ---------------------------
-//------------------------------------
-router.get(
-    "/api/maquinasJWT",
-    auth.authenticateJWT,
-    async function (req, res, next) {
-      /* #swagger.security = [{
-                 "bearerAuth1": []
-          }] */
-  
-      // #swagger.tags = ['maquinas']
-      // #swagger.summary = 'obtiene todas las Maquinas, con seguridad JWT, solo para rol: admin (usuario:admin, clave:123)'
-      const { rol } = res.locals.user;
-      if (rol !== "admin") {
-        return res.status(403).json({ message: "usuario no autorizado!" });
-      }
-  
-      let items = await db.Maquina.findAll({
-        attributes: [
-            "IdMaquina",
-            "Nombre",
-            "IdGimnasio",
-            "IdProveedor",
-            "FechaCreacion",
-            "ConStock",
-            "Eliminado"
-        ],
-        order: [["Nombre", "ASC"]],
-      });
-      res.json(items);
-    }
-  );
-  
 
 module.exports = router;

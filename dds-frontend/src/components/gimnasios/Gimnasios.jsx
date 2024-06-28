@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { GimnasiosMockService } from "../../services/gimnasios-mock.services";
+import { GimnasiosService } from "../../services/gimnasios.services";
 function Gimnasios() {
   const tituloPagina = "Gimnasios";
   const [gimnasios, setGimnasios] = useState(null);
@@ -7,20 +7,20 @@ function Gimnasios() {
     BuscarArticulosFamilas();
   }, []);
   async function BuscarArticulosFamilas() {
-    let data = await GimnasiosMockService.Buscar();
+    let data = await GimnasiosService.Buscar();
     setGimnasios(data);
   }
   return (
-    <section class="intro">
-      <div class="tabla h-100">
-        <div class="mask d-flex align-items-center h-100">
-          <div class="container">
-            <div class="row justify-content-center">
-              <div class="col-12">
-                <div class="table-responsive">
+    <section className="intro">
+      <div className="tabla h-100">
+        <div className="mask d-flex align-items-center h-100">
+          <div className="container">
+            <div className="row justify-content-center">
+              <div className="col-12">
+                <div className="table-responsive">
                   <div>
                     <div className="tituloPagina">{tituloPagina}</div>
-                    <table class="table table-dark table-bordered mb-0">
+                    <table className="table table-dark table-bordered mb-0">
                       <thead>
                         <tr>
                           <th style={{ width: "33%" }}>IdGimnasio</th>

@@ -91,7 +91,7 @@ function Login() {
                     type="button"
                     onClick={handleIngresar}
                   >
-                    <span class="text">Ingresar</span>
+                    <span className="text">Ingresar</span>
                   </button>
                 </div>
 

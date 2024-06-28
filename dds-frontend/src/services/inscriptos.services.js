@@ -1,18 +1,11 @@
 import { config } from "../config";
 import httpService from "./http.services";
-const urlServidor = "https://localhost:3000"
-const urlResourceInscriptos = urlServidor + "/api/inscriptos";
+
+const urlResource = config.urlResourceInscriptos;
 
 
-
-
-const urlResource = urlResourceInscriptos;
-
-
-async function Buscar(Nombre, Activo, Pagina) {
-    const resp = await httpService.get(urlResource, {
-        params: { Nombre, Activo, Pagina },
-    });
+async function Buscar() {
+    const resp = await httpService.get(urlResource);
     return resp.data;
 }
 

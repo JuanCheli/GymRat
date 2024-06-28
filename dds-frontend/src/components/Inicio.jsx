@@ -15,8 +15,8 @@ function Inicio() {
           </p> <br />
           <div className="text-center mt-8">
             <Link to="/gimnasios">
-              <button class="button-64 boton-gimnasios" role="button">
-                <span class="text">
+              <button className="button-64 boton-gimnasios" role="button">
+                <span className="text">
                   <i className="fa fa-search"></i>Ver Gimnasios
                 </span>
               </button>

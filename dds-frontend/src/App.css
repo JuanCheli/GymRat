@@ -29,7 +29,7 @@ footer {
 
 label:not([class^="custom-control"]) {
   border-radius: 0.625em 0.2em 0rem 0.625em;
-  margin-right: -0.9em; /* para que columna label este cerca del input*/
+  margin-right: -0.9em; 
   padding-left: 0.5em;
   display: block;
   height: 90%;
@@ -38,7 +38,7 @@ label:not([class^="custom-control"]) {
 @media only screen and (max-width: 575px) {
   label:not([class^="custom-control"]) {
     margin-right: 0em;
-    margin-top: 0.3rem; /* para separar grupo label/input */
+    margin-top: 0.3rem; 
   }
 }
 
