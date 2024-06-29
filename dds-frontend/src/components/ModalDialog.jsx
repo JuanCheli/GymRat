@@ -65,7 +65,7 @@ function ModalDialog() {
       faIcon = "fa-solid fa--info";
       break;
     case "warning":
-      faIcon = "fa-regular fa-triangle-exclamation";
+      faIcon = "fa-solid fa-triangle-exclamation";
       break;
     default:
       break;

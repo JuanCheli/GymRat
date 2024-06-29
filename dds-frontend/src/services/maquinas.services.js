@@ -10,7 +10,15 @@ async function BuscarPorId(item) {
   const resp = await axios.get(urlResource + "/" + item.IdMaquina);
   return resp.data;
 }
+
+
 async function ActivarDesactivarStock(item) {
+  // Cambia el valor de ConStock a su opuesto
+  const updatedItem = { ...item, ConStock: !item.ConStock };
+  await axios.patch(urlResource + "/" + item.IdMaquina, { ConStock: updatedItem.ConStock });
+}
+
+async function ActivarDesactivarMaquina(item) {
   await axios.delete(urlResource + "/" + item.IdMaquina);
 }
 async function Grabar(item) {

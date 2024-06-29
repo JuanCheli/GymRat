@@ -71,9 +71,25 @@ export default function MaquinasListado({
                                 onClick={() => ActivarDesactivarStock(Item)}
                               >
                                 <i
+                                  className={"fa fa-archive" }
+                                ></i>
+                              </button>
+                              <button
+                                className={
+                                  "btn btn-sm " +
+                                  (Item.Eliminado
+                                    ? "btn-outline-danger"
+                                    : "btn-outline-success")
+                                }
+                                title={
+                                  Item.Eliminado ? "Desactivada" : "Activada"
+                                }
+                                onClick={() => ActivarDesactivarMaquina(Item)}
+                              >
+                                <i
                                   className={
                                     "fa fa-" +
-                                    (Item.ConStock ? "times" : "check")
+                                    (Item.Eliminado ? "times" : "check")
                                   }
                                 ></i>
                               </button>

@@ -68,8 +68,12 @@ function Maquinas() {
   }
 
   function Modificar(item) {
-    if (!item.ConStock) {
-      modalDialogService.Alert("No puede modificarse una máquina sin stock.");
+    if (item.ConStock) {
+      modalDialogService.Alert("No puede modificarse una máquina con stock.");
+      return;
+    }
+    if (!item.Eliminado) {
+      modalDialogService.Alert("No puede modificarse una máquina desactivada.");
       return;
     }
     BuscarPorId(item, "M"); 
@@ -103,6 +107,21 @@ function Maquinas() {
       undefined,
       async () => {
         await MaquinasService.ActivarDesactivarStock(item);
+        await Buscar();
+      }
+    );
+  }
+
+  async function ActivarDesactivarMaquina(item) {
+    modalDialogService.Confirm(
+      "Esta seguro que quiere " +
+        (item.Eliminado ? "desactivar" : "activar") +
+        " a la máquina??",
+      undefined,
+      undefined,
+      undefined,
+      async () => {
+        await MaquinasService.ActivarDesactivarMaquina(item);
         await Buscar();
       }
     );
@@ -157,6 +176,7 @@ function Maquinas() {
             Consultar,
             Modificar,
             ActivarDesactivarStock,
+            ActivarDesactivarMaquina,
             Imprimir,
             Pagina,
             RegistrosTotal,
