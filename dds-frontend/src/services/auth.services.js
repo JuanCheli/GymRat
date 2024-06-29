@@ -16,14 +16,12 @@ const login = async (usuario, clave, navigateToComponent) => {
     sessionStorage.setItem("refreshToken", resp.data.refreshToken);
     if (CambioUsuarioLogueado) CambioUsuarioLogueado(usuario);
     {
-      //navigate("/Inicio");
      navigateToComponent();
     }
    
   } else {
     if (CambioUsuarioLogueado) CambioUsuarioLogueado(null);
-    //alert("Usuario o clave incorrectos");
-    modalService.Alert("Usuario o clave incorrectos");
+    modalService.Alert("¡Credenciales incorrectas!");
   }
 };
 

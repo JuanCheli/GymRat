@@ -1,9 +1,9 @@
-let ModalDialog_Show = null;  //apunta a la funcion show del componente ModalDialog
+let ModalDialog_Show = null;
 
 
 const Alert = (
     _mensaje,
-    _titulo = "Atención",
+    _titulo = "Error...",
     _boton1 = "Aceptar",
     _boton2 = "",
     _accionBoton1 = null,
@@ -56,7 +56,7 @@ const BloquearPantalla = (blnBloquear) => {
         if (cntBloquearPantalla === 1) {
             ModalDialog_Show(
                 "BloquearPantalla",
-                "Espere por favor...",
+                "Por favor, espere...",
                 "",
                 "",
                 null,

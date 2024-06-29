@@ -230,11 +230,23 @@ tbody td {
   color: rgba(255,255,255,.65);
 }
 
-/* ESTILOS BARRA DE PROGRESO */
-.demo{
-  background: linear-gradient(to right, #322c35, #545454, #322c35);
+/* ESTILOS VENTANAS DE ALERTA */
+
+@keyframes progressAnimation {
+  0% {
+    width: 0;
+  }
+  100% {
+    width: 100%;
+  }
 }
-.progress{
+
+.demo {
+  background: linear-gradient(to right, #7e7683, #cccccc, #7e7683);
+  animation: progressAnimation 2s ease-in-out forwards;
+}
+
+.progress {
   background: #262626;
   border-radius: 20px;
   height: 20px;
@@ -243,45 +255,68 @@ tbody td {
   margin-top: 50px;
   overflow: visible;
 }
-.progress .progress-bar{
-  border-radius: 20px;
-  position: relative;
-  animation: animate-positive 2s;
-}
-.progress .progress-bar:after{
-  content: "\f111";
-  font-family: "Font Awesome 5 Free";
-  font-weight: 900;
-  font-size: 10px;
-  color: rgba(0,0,0,0.4);
-  position: absolute;
-  top: -1px;
-  right: 10px;
-}
-.progress .progress-value{
-  display: block;
-  font-size: 13px;
+
+
+/* Estilo personalizado para el header del modal */
+.modal-header {
+  background-color: #000;
+  border-radius: 5px;
+  border: 1px solid #fff;
   color: #fff;
-  border-radius: 4px;
-  padding: 3px 8px;
-  background:#191919;
-  position: absolute;
-  top: -40px;
-  right: -27px;
+  text-align: center;
+  display: flex;
+  justify-content: center;
 }
-.progress .progress-value:after{
-  content: "";
-  border-top: 5px solid #191919;
-  border-left: 5px solid #191919;
-  border-bottom: 5px solid transparent ;
-  border-right: 5px solid transparent;
-  position: absolute;
-  bottom: -6px;
-  left: 0;
+
+/* Estilo personalizado para el título del modal */
+.modal-title {
+  text-align: center;
+  flex: 1;
 }
-@-webkit-keyframes animate-positive{
-  0% { width: 0%; }
+
+/* Estilo personalizado para el cuerpo del modal */
+.modal-body {
+  background-color: #000;
+  border-radius: 5px;
+  border: 1px solid #fff;
+  color: #fff;
+  text-align: center;
 }
-@keyframes animate-positive{
-  0% { width: 0%; }
+
+/* Estilo personalizado para el footer del modal */
+.modal-footer {
+  background-color: #000 !important;
+  border: 1px solid #fff !important;
+  justify-content: center !important;
 }
+
+/* Estilo para los botones en el footer del modal */
+.btn-modal-footer {
+  background-color: #000 !important;
+  color: #fff !important;
+  margin: 20px;
+  font-size: 14px;
+  padding: 6px 12px;
+  margin-bottom: 0;
+  text-decoration: none;
+  text-align: center;
+  white-space: nowrap;
+  vertical-align: middle;
+  -ms-touch-action: manipulation;
+  touch-action: manipulation;
+  cursor: pointer;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  background-image: none;
+  border: 2px solid #fff;
+  justify-content: center;
+}
+
+.btn-modal-footer:hover {
+  background-color: #fff !important;
+  color:#000 !important;
+  border: 2px solid #000;
+}
+

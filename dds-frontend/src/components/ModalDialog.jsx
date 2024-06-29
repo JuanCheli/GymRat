@@ -29,9 +29,6 @@ function ModalDialog() {
   };
 
   function Show(
-    // cuidado en esta funcion cuando se invoca desde el servicio modalDialogService
-    //   NO tiene las variables de state del componente, ej mensaje, titulo, boton1....
-    //   pero SI a las funciones setMensaje, setTitulo, setBoton1....
     _mensaje,
     _titulo,
     _boton1,
@@ -50,10 +47,8 @@ function ModalDialog() {
   }
 
   useEffect(() => {
-    //suscribirse al servicio modalDialogService al iniciar el componente
     modalDialogService.subscribeShow(Show);
     return () => {
-      //desuscribirse al servicio modalDialogService al desmontar el componente
       modalDialogService.subscribeShow(null);
     };
   }, []);
@@ -62,23 +57,18 @@ function ModalDialog() {
   let faIcon = "";
   switch (tipo) {
     case "success":
-      classHeader = "bg-success";
       faIcon = "fa-solid fa-thumbs-up";
       break;
     case "danger":
-      classHeader = "bg-danger";
       faIcon = "fa-solid fa-circle-exclamation";
       break;
     case "info":
-      classHeader = "bg-info";
       faIcon = "fa-solid fa--info";
       break;
     case "warning":
-      classHeader = "bg-warning";
       faIcon = "fa-regular fa-triangle-exclamation";
       break;
     default:
-      classHeader = "bg-success";
       break;
   }
 
@@ -93,17 +83,17 @@ function ModalDialog() {
         keyboard={mensaje === "BloquearPantalla" ? false : true}
       >
         <Modal.Header
-          className={classHeader}
+          className="modal-header"
           closeButton={mensaje !== "BloquearPantalla"}
         >
-          <Modal.Title>{titulo}</Modal.Title>
+          <Modal.Title className="modal-title">{titulo}</Modal.Title>
         </Modal.Header>
 
-        <Modal.Body style={{ fontSize: "1.2em" }}>
+        <Modal.Body style={{ fontSize: "1.2em" }} className="modal-body">
           {mensaje === "BloquearPantalla" ? (
             <div className="progress">
               <div
-                className="progress-bar"
+                className="progress-bar demo"
                 role="progressbar"
                 aria-valuenow="100"
                 aria-valuemin="0"
@@ -122,11 +112,11 @@ function ModalDialog() {
           )}
         </Modal.Body>
 
-        <Modal.Footer>
+        <Modal.Footer className="modal-footer">
           {boton1 !== "" && (
             <button
               type="button"
-              className="btn btn-primary"
+              className="btn-modal-footer"
               onClick={handleAccionBoton1}
             >
               {boton1}
@@ -135,7 +125,7 @@ function ModalDialog() {
           {boton2 !== "" && (
             <button
               type="button"
-              className="btn btn-secondary"
+              className="btn-modal-footer"
               onClick={handleAccionBoton2}
             >
               {boton2}

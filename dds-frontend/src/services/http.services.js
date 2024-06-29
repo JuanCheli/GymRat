@@ -19,7 +19,7 @@ httpService.interceptors.request.use(
     return request;
   },
   (error) => {
-    console.log("error en axios request", error);
+    console.log("Error en axios request", error);
     return Promise.reject(error);
   }
 );
@@ -31,13 +31,13 @@ httpService.interceptors.response.use(
     return response;
   },
   (error) => {
-    console.log("error en axios response ", error);
+    console.log("Error en axios response ", error);
     modalService.BloquearPantalla(false);
 
     if (error.response.status === 401) {
-      error.message = "debe loguearse para acceder a esta funcionalidad";
+      error.message = "Debe loguearse para acceder a esta funcionalidad";
     } else if (error.response.status === 403) {
-      error.message = "usuario no autorizado para acceder a esta funcionalidad";
+      error.message = "Usuario no autorizado para acceder a esta funcionalidad";
     } else {
       error.message =
         error?.response?.data?.message ??
