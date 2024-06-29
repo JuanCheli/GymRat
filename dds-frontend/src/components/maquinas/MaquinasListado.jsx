@@ -20,7 +20,7 @@ export default function MaquinasListado({
             <div className="row justify-content-center">
               <div className="col-12">
                 <div className="table-responsive">
-                 <div className="tituloPagina">Máquinas</div>
+                  <div className="tituloPagina">Máquinas</div>
                   <table className="table table-dark table-bordered mb-0">
                     <thead>
                       <tr>
@@ -82,7 +82,6 @@ export default function MaquinasListado({
                         ))}
                     </tbody>
                   </table>
-
                   {/* Paginador*/}
                   <div className="paginador bg-dark">
                     <div className="row">
@@ -93,7 +92,7 @@ export default function MaquinasListado({
                       </div>
                       <div className="col">
                         <button
-                          className="btn btn-primary float-end"
+                          className="button-64 h6 h-100 float-end"
                           onClick={() => Imprimir()}
                         >
                           <i className="fa fa-print"></i>Imprimir

@@ -24,7 +24,7 @@ export default function MaquinasRegistro({
           {/* campo nombre */}
           <div className="row">
             <div className="col-sm-4 col-md-3 offset-md-1">
-              <label className="col-form-label" htmlFor="Nombre">
+              <label className="col-form-label text-light" htmlFor="Nombre">
                 Nombre<span className="text-danger">*</span>:
               </label>
             </div>
@@ -58,7 +58,7 @@ export default function MaquinasRegistro({
           {/* campo Gimnasio */}
           <div className="row">
             <div className="col-sm-4 col-md-3 offset-md-1">
-              <label className="col-form-label" htmlFor="IdGimnasio">
+              <label className="col-form-label text-light" htmlFor="IdGimnasio">
                 Gimnasio<span className="text-danger">*</span>:
               </label>
             </div>
@@ -88,7 +88,7 @@ export default function MaquinasRegistro({
           {/* campo Proveedor */}
           <div className="row">
             <div className="col-sm-4 col-md-3 offset-md-1">
-              <label className="col-form-label" htmlFor="IdProveedor">
+              <label className="col-form-label text-light" htmlFor="IdProveedor">
                 Proveedor<span className="text-danger">*</span>:
               </label>
             </div>
@@ -118,7 +118,7 @@ export default function MaquinasRegistro({
           {/* campo FechaCreacion */}
           <div className="row">
             <div className="col-sm-4 col-md-3 offset-md-1">
-              <label className="col-form-label" htmlFor="FechaCreacion">
+              <label className="col-form-label text-light" htmlFor="FechaCreacion">
                 Fecha Creacion<span className="text-danger">*</span>:
               </label>
             </div>
@@ -144,7 +144,7 @@ export default function MaquinasRegistro({
           {/* campo ConStock */}
           <div className="row">
             <div className="col-sm-4 col-md-3 offset-md-1">
-              <label className="col-form-label" htmlFor="ConStock">
+              <label className="col-form-label text-light" htmlFor="ConStock">
                 Con Stock<span className="text-danger">*</span>:
               </label>
             </div>
@@ -167,13 +167,13 @@ export default function MaquinasRegistro({
         <div className="row justify-content-center">
           <div className="col text-center botones">
             {AccionABMC !== "C" && (
-              <button type="submit" className="btn btn-primary">
+              <button type="submit" className="button-64 h-100">
                 <i className="fa fa-check"></i> Grabar
               </button>
             )}
             <button
               type="button"
-              className="btn btn-warning"
+              className="button-64 h-100"
               onClick={() => Volver()}
             >
               <i className="fa fa-undo"></i>

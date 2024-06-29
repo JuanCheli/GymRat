@@ -12,7 +12,7 @@ export default function MaquinasBuscar({
       <div className="container-fluid">
         <div className="row">
           <div className="col-sm-4 col-md-2">
-            <label className="col-form-label">Nombre:</label>
+            <label className="col-form-label text-light">Nombre:</label>
           </div>
           <div className="col-sm-8 col-md-4">
             <input
@@ -25,7 +25,7 @@ export default function MaquinasBuscar({
             />
           </div>
           <div className="col-sm-4 col-md-2">
-            <label className="col-form-label">Hay Stock:</label>
+            <label className="col-form-label text-light">Hay Stock:</label>
           </div>
           <div className="col-sm-8 col-md-4">
             <select
@@ -47,14 +47,14 @@ export default function MaquinasBuscar({
           <div className="col text-center botones">
             <button
               type="button"
-              className="btn btn-primary"
+              className="btn button-64"
               onClick={() => Buscar(1)}
             >
               <i className="fa fa-search"> </i> Buscar
             </button>
             <button
               type="button"
-              className="btn btn-primary"
+              className="btn button-64"
               onClick={() => Agregar()}
             >
               <i className="fa fa-plus"> </i> Agregar

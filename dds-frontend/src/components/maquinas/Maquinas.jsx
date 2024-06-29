@@ -85,7 +85,7 @@ function Maquinas() {
       FechaCreacion: moment(new Date()).format("YYYY-MM-DD"),
       ConStock: true,
     });
-    alert("preparando el alta...");
+    alert("Preparando el alta de la máquina...");
     console.log(Item);
   }
 
@@ -97,7 +97,7 @@ function Maquinas() {
     modalDialogService.Confirm(
       "Esta seguro que quiere " +
         (item.ConStock ? "registrar como sin stock" : "registrar como con stock") +
-        " el registro?",
+        " a la máquina??",
       undefined,
       undefined,
       undefined,
@@ -135,7 +135,7 @@ function Maquinas() {
   return (
     <div>
       <div className="tituloPagina">
-        Maquinas <small>{TituloAccionABMC[AccionABMC]}</small>
+        Máquinas <small>{TituloAccionABMC[AccionABMC]}</small>
       </div>
 
       {AccionABMC === "L" && (
