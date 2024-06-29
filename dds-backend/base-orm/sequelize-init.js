@@ -111,7 +111,7 @@ const Maquina = sequelize.define(
                 msg: "Este nombre ya existe en la tabla!",
             },
         },
-        Gimnasio: {
+        IdGimnasio: {
             type: DataTypes.INTEGER,
             allowNull: false,
             references: {
@@ -119,7 +119,7 @@ const Maquina = sequelize.define(
                 key: 'IdGimnasio',
             },
         },
-        Proveedor: {
+        IdProveedor: {
             type: DataTypes.INTEGER,
             allowNull: false,
             references: {
@@ -131,7 +131,7 @@ const Maquina = sequelize.define(
             type: DataTypes.STRING,
             allowNull: false,
         },
-        Eliminado: {
+        ConStock: {
             type: DataTypes.BOOLEAN,
             allowNull: false,
             defaultValue: false // Esto asegura que se inicialice en 0 (false)
@@ -166,7 +166,7 @@ const Inscripto = sequelize.define(
             type: DataTypes.STRING,
             allowNull: false,
         },
-        Gimnasio: {
+        IdGimnasio: {
             type: DataTypes.INTEGER,
             allowNull: false,
             references: {

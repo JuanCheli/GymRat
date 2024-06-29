@@ -21,6 +21,7 @@ router.get("/api/inscriptos/:id", async function (req, res, next) {
       "Nombre",
       "FechaInscripcion",
       "IdGimnasio",
+      "Eliminado"
     ],
     where: { IdInscripto: req.params.id },
   });
@@ -79,9 +80,10 @@ router.put("/api/inscriptos/:id", async (req, res) => {
       res.status(404).json({ message: "inscripto No Encontrado" });
       return;
     }
+    item.IdInscripto = req.body.IdInscripto
     item.Nombre = req.body.Nombre,
-      item.FechaInscripcion = req.body.FechaInscripcion,
-      item.IdGimnasio = req.body.IdGimnasio
+    item.FechaInscripcion = req.body.FechaInscripcion,
+    item.IdGimnasio = req.body.IdGimnasio
     await item.save();
     res.sendStatus(204);
 

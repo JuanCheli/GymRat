@@ -18,8 +18,8 @@ router.get("/api/maquinas", async function (req, res, next) {
             "IdMaquina",
             "Nombre",
             "FechaCreacion",
+            "ConStock",
         ],
-        order: [["Nombre", "ASC"]],
         where,
         offset: (Pagina - 1) * TamañoPagina,
         limit: TamañoPagina,
@@ -89,9 +89,6 @@ router.get("/api/maquinas/:id", async function (req, res, next) {
     res.json(items);
 });
 
-
-
-
 router.post("/api/maquinas/", async (req, res) => {
     // #swagger.tags = ['maquinas']
     // #swagger.summary = 'agrega un Articulo'
@@ -106,7 +103,6 @@ router.post("/api/maquinas/", async (req, res) => {
             IdGimnasio: req.body.IdGimnasio,
             IdProveedor: req.body.IdProveedor,
             FechaCreacion: req.body.FechaCreacion,
-            Eliminado: req.body.Eliminado,
         });
         res.status(200).json(data.dataValues); // devolvemos el registro agregado!
     } catch (err) {
@@ -114,7 +110,7 @@ router.post("/api/maquinas/", async (req, res) => {
             // si son errores de validación, los devolvemos
             let messages = '';
             err.errors.forEach((x) => messages += (x.path ?? 'campo') + ": " + x.message + '\n');
-            res.status(400).json({ message: messages });
+            res.status(200).json({ message: messages });
         } else {
             // si son errores desconocidos, los dejamos que los controle el middleware de errores
             throw err;
@@ -141,7 +137,6 @@ router.put("/api/maquinas/:id", async (req, res) => {
                 "IdProveedor",
                 "FechaCreacion",
                 "ConStock",
-                "Eliminado",
             ],
             where: { IdMaquina: req.params.id },
         });
@@ -149,6 +144,7 @@ router.put("/api/maquinas/:id", async (req, res) => {
             res.status(404).json({ message: "Maquina No Encontrada" });
             return;
         }
+        item.IdMaquina = req.body.IdMaquina
         item.Nombre = req.body.Nombre,
         item.IdGimnasio = req.body.IdGimnasio,
         item.IdProveedor = req.body.IdProveedor,
@@ -188,7 +184,7 @@ router.delete("/api/maquinas/:id", async (req, res) => {
         // baja lógica
         try {
             let data = await db.sequelize.query(
-                'UPDATE Maquinas SET eliminado = 1 WHERE IdMaquina = :IdMaquina',
+                'UPDATE Maquinas SET conStock = 0 WHERE IdMaquina = :IdMaquina',
                 {
                     replacements: { IdMaquina: req.params.id },
                     type: db.sequelize.QueryTypes.UPDATE,

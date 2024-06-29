@@ -95,9 +95,8 @@ async function CrearBaseSiNoExiste() {
         IdProveedor INTEGER,
         FechaCreacion text,
         ConStock BOOLEAN DEFAULT 1,
-        Eliminado BOOLEAN DEFAULT 0,
         FOREIGN KEY (IdGimnasio) REFERENCES gimnasios(IdGimnasio),
-        FOREIGN KEY (IdProveedor) REFERENCES proveedor(IdProveedor)
+        FOREIGN KEY (IdProveedor) REFERENCES proveedores(IdProveedor)
       );`
     );
     console.log("tabla maquinas creada!");

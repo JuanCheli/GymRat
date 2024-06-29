@@ -23,7 +23,7 @@ router.get("/api/gimnasios/:id", async function (req, res, next) {
     ],
     where: { IdGimnasio: req.params.id },
   });
-  res.json(items);
+  res.json(items);  
 });
 
 router.post("/api/gimnasios/", async (req, res) => {
@@ -37,7 +37,7 @@ router.post("/api/gimnasios/", async (req, res) => {
   try {
     let data = await db.Gimnasio.create({
       Nombre: req.body.Nombre,
-      FechaCreacion: req.body.FechaAlta
+      FechaAlta: req.body.FechaAlta
     });
     res.status(200).json(data.dataValues); // devolvemos el registro agregado!
   } catch (err) {
@@ -77,8 +77,9 @@ router.put("/api/gimnasios/:id", async (req, res) => {
       res.status(404).json({ message: "Gimnasio No Encontrado" });
       return;
     }
+    item.idGimnasio = req.body.idGimnasio
     item.Nombre = req.body.Nombre,
-    item.FechaCreacion = req.body.FechaCreacion,
+    item.FechaAlta = req.body.FechaAlta,
     item.Eliminado = req.body.Eliminado,
     await item.save();
     res.sendStatus(204);

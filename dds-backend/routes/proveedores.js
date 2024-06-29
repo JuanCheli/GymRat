@@ -74,6 +74,7 @@ router.put("/api/proveedores/:id", async (req, res) => {
             "Pais",
             "Telefono",
             "FechaAltaEmpresa",
+            "Eliminado"
           ],
       where: { IdProveedor: req.params.id },
     });
@@ -81,6 +82,7 @@ router.put("/api/proveedores/:id", async (req, res) => {
       res.status(404).json({ message: "Proveedor No Encontrado" });
       return;
     }
+    item.IdProveedor = req.body.IdProveedor
     item.Nombre = req.body.Nombre,
     item.Pais = req.body.Pais,
     item.Telefono = req.body.Telefono

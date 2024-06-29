@@ -2,17 +2,16 @@ const request = require("supertest");
 const app = require("../index");
 const maquinaAlta = {
   Nombre: "Maquina " + (() => (Math.random() + 1).toString(36).substring(2))(), // Genera un nombre aleatorio
-  Gimnasio: 1,
-  Proveedor: 3,
+  IdGimnasio: 1,
+  IdProveedor: 2,
   FechaCreacion: new Date().toISOString(),
-  Eliminado: true,
 };
+
 const maquinaModificacion = {
   Nombre: "Maquina " + (() => (Math.random() + 1).toString(36).substring(2))(), // Genera un nombre aleatorio
-  Gimnasio: 4,
-  Proveedor: 2,
+  IdGimnasio: 4,
+  IdProveedor: 2,
   FechaCreacion: new Date().toISOString(),
-  Eliminado: true,
 };
 
 // test route/maquinas GET
@@ -27,10 +26,7 @@ describe("GET /api/maquinas", () => {
           expect.objectContaining({
             IdMaquina: expect.any(Number),
             Nombre: expect.any(String),
-            Gimnasio: expect.any(Number),
-            Proveedor: expect.any(Number),
             FechaCreacion: expect.any(String),
-            Eliminado: expect.any(Boolean)
           }),
         ]),
         RegistrosTotal: expect.any(Number),
@@ -42,14 +38,14 @@ describe("GET /api/maquinas", () => {
 // test route/maquinas GET
 describe("GET /api/maquinas con filtros", () => {
   it("Deberia devolver las maquinas según filtro ", async () => {
-    const res = await request(app).get("/api/maquinas/filtro/?Nombre=Pecho&Activo=true&Pagina=1");
+    const res = await request(app).get("/api/maquinas/filtro/?Nombre=Pecho&Pagina=1");
     expect(res.statusCode).toEqual(200);
 
     expect(verificarPropiedades(res.body.Items) ).toEqual(true );
   
     function verificarPropiedades(array) {
       for (let i = 0; i < array.length; i++) {
-        if ( !array[i].Nombre.includes("Pecho") || !array[i].Activo ) {
+        if ( !array[i].Nombre.includes("Pecho") || !array[i].ConStock ) {
           return false;
         }
       }
@@ -68,10 +64,10 @@ describe("GET /api/maquinas/:id", () => {
       expect.objectContaining({
         IdMaquina: expect.any(Number),
         Nombre: expect.any(String),
-        Gimnasio: expect.any(Number),
-        Proveedor: expect.any(Number),
+        IdGimnasio: expect.any(Number),
+        IdProveedor: expect.any(Number),
         FechaCreacion: expect.any(String),
-        Eliminado: expect.any(Boolean)
+        ConStock: expect.any(Boolean)
       })
     );
   });
@@ -84,12 +80,10 @@ describe("POST /api/maquinas", () => {
     expect(res.statusCode).toEqual(200);
     expect(res.body).toEqual(
       expect.objectContaining({
-        IdMaquina: expect.any(Number),
         Nombre: expect.any(String),
-        Gimnasio: expect.any(Number),
-        Proveedor: expect.any(Number),
-        FechaCreacion: expect.any(String),
-        Eliminado: expect.any(Boolean)
+        IdGimnasio: expect.any(Number),
+        IdProveedor: expect.any(Number),
+        FechaCreacion: expect.any(String)
       })
     );
   });
