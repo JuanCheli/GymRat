@@ -3,7 +3,7 @@ import moment from "moment";
 import MaquinasBuscar from "./MaquinasBuscar";
 import MaquinasListado from "./MaquinasListado";
 import MaquinasRegistro from "./MaquinasRegistro";
-import { maquinasService } from "../../services/maquinas.services";
+import { MaquinasService } from "../../services/maquinas.services";
 import modalDialogService from "../../services/modalDialog.services";
 
 function Maquinas() {
@@ -29,7 +29,7 @@ function Maquinas() {
 
   useEffect(() => {
     async function BuscarMaquinas() {
-      let data = await maquinasService.Buscar();
+      let data = await MaquinasService.Buscar();
       setMaquinas(data);
     }
     BuscarMaquinas();
@@ -43,7 +43,7 @@ function Maquinas() {
       _pagina = Pagina;
     }
     modalDialogService.BloquearPantalla(true);
-    const data = await maquinasService.Buscar(Nombre, Activo, _pagina);
+    const data = await MaquinasService.Buscar(Nombre, ConStock, _pagina);
     modalDialogService.BloquearPantalla(false);
 
     setItems(data.Items);
@@ -58,7 +58,7 @@ function Maquinas() {
   }
 
   async function BuscarPorId(item, accionABMC) {
-    const data = await maquinasService.BuscarPorId(item);
+    const data = await MaquinasService.BuscarPorId(item);
     setItem(data);
     setAccionABMC(accionABMC);
   }
@@ -68,7 +68,7 @@ function Maquinas() {
   }
 
   function Modificar(item) {
-    if (!item.Activo) {
+    if (!item.ConStock) {
       modalDialogService.Alert("No puede modificarse una máquina sin stock.");
       return;
     }
@@ -83,7 +83,7 @@ function Maquinas() {
       Gimnasio: 0,
       Proveedor: 0,
       FechaCreacion: moment(new Date()).format("YYYY-MM-DD"),
-      Activo: true,
+      ConStock: true,
     });
     alert("preparando el alta...");
     console.log(Item);
@@ -102,7 +102,7 @@ function Maquinas() {
       undefined,
       undefined,
       async () => {
-        await maquinasService.ActivarDesactivarStock(item);
+        await MaquinasService.ActivarDesactivarStock(item);
         await Buscar();
       }
     );
@@ -110,7 +110,7 @@ function Maquinas() {
 
   async function Grabar(item) {
     try {
-      await maquinasService.Grabar(item);
+      await MaquinasService.Grabar(item);
     } catch (error) {
       alert(error?.response?.data?.message ?? error.toString());
       return;
@@ -176,7 +176,7 @@ function Maquinas() {
       {/* Formulario de alta/modificacion/consulta */}
       {AccionABMC !== "L" && (
         <MaquinasRegistro
-          {...{ AccionABMC, Gimnasios, Proveedores, Item, Grabar, Volver }}
+          {...{ AccionABMC, Maquinas, Item, Grabar, Volver }}
         />
       )}
     </div>

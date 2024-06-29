@@ -82,7 +82,6 @@ label:not([class^="custom-control"]) {
 .paginador {
   background-color: #e9ecef;
   padding: 0.5rem 1rem 0rem 1rem;
-  margin-top: -1rem; /* para pegarlo a la tabla */
 }
 
 input {

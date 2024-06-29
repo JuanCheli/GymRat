@@ -1,10 +1,9 @@
 import axios from "axios";
-const urlResource = "https://labsys.frc.utn.edu.ar/dds-backend-2024/api/articulos";
+import { config } from "../config.js"
+const urlResource = config.urlResourceMaquinas;
 
-async function Buscar(Nombre, Activo, Pagina) {
-  const resp = await axios.get(urlResource, {
-    params: { Nombre, Activo, Pagina },
-  });
+async function Buscar(Nombre, ConStock, Pagina) {
+  const resp = await axios.get((urlResource), {params: Nombre, ConStock, Pagina});
   return resp.data;
 }
 async function BuscarPorId(item) {
@@ -21,6 +20,6 @@ async function Grabar(item) {
     await axios.put(urlResource + "/" + item.IdMaquina, item);
   }
 }
-export const maquinasService = {
+export const MaquinasService = {
     Buscar,BuscarPorId,ActivarDesactivarStock,Grabar
 };

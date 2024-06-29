@@ -125,6 +125,7 @@ body {
   font-size:large;
   font-weight: 400;
   margin-top:auto;
+  height: 12.5vh;
 }
 
 /* ESTILOS NAV */
@@ -237,7 +238,7 @@ tbody td {
     opacity: 1;
   }
   50% {
-    opacity: 0.4;
+    opacity: 0.;
   }
 }
 
