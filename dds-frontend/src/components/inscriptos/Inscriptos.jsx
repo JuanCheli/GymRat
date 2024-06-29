@@ -3,20 +3,36 @@ import { InscriptosService } from "../../services/inscriptos.services";
 
 function Inscriptos() {
   const tituloPagina = "Inscriptos (solo para administradores)";
-  const [inscriptos, setInscriptos] = useState(null);
+  const [inscriptos, setInscriptos] = useState([]);
+  const [gimnasios, setGimnasios] = useState([]);
 
-  // cargar al iniciar el componente, solo una vez
   useEffect(() => {
     BuscarInscriptos();
+    BuscarGimnasios();
   }, []);
 
   async function BuscarInscriptos() {
     try {
-      let data = await InscriptosService.Buscar();
+      const data = await InscriptosService.Buscar();
       setInscriptos(data);
     } catch (error) {
       console.log("¡Error! No se pudo buscar datos en el servidor.");
     }
+  }
+
+  async function BuscarGimnasios() {
+    try {
+      const data = await InscriptosService.BuscarGimnasios();
+      setGimnasios(data);
+    } catch (error) {
+      console.log("¡Error! No se pudo buscar datos de gimnasios en el servidor.");
+    }
+  }
+
+  function getNombreGimnasio(IdGimnasio) {
+    if (!gimnasios || gimnasios.length === 0) return IdGimnasio;
+    const gimnasio = gimnasios.find((g) => g.IdGimnasio === IdGimnasio);
+    return gimnasio ? gimnasio.Nombre : IdGimnasio;
   }
 
   return (
@@ -28,7 +44,6 @@ function Inscriptos() {
               <div className="row justify-content-center">
                 <div className="col-12">
                   <div className="table-responsive">
-                    <div></div>
                     <div className="tituloPagina">{tituloPagina}</div>
                     <table className="table table-dark table-bordered mb-0">
                       <thead>
@@ -40,15 +55,14 @@ function Inscriptos() {
                         </tr>
                       </thead>
                       <tbody>
-                        {inscriptos &&
-                          inscriptos.map((inscriptos) => (
-                            <tr key={inscriptos.IdInscripto}>
-                              <td>{inscriptos.IdInscripto}</td>
-                              <td>{inscriptos.Nombre}</td>
-                              <td>{inscriptos.FechaInscripcion}</td>
-                              <td>{inscriptos.IdGimnasio}</td>
-                            </tr>
-                          ))}
+                        {inscriptos.map((inscripto) => (
+                          <tr key={inscripto.IdInscripto}>
+                            <td>{inscripto.IdInscripto}</td>
+                            <td>{inscripto.Nombre}</td>
+                            <td>{inscripto.FechaInscripcion}</td>
+                            <td>{getNombreGimnasio(inscripto.IdGimnasio)}</td>
+                          </tr>
+                        ))}
                       </tbody>
                     </table>
                   </div>
@@ -61,5 +75,6 @@ function Inscriptos() {
     </>
   );
 }
+
 Inscriptos.NombreComponenteNoOfuscado = "Inscriptos";
 export { Inscriptos };
