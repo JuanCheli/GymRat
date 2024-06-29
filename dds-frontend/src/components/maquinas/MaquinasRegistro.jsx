@@ -1,5 +1,6 @@
 import React from "react";
 import { useForm } from "react-hook-form";
+import {config} from "../../config.js"
 
 export default function MaquinasRegistro({
   AccionABMC,

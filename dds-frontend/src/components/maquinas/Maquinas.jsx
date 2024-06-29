@@ -24,22 +24,36 @@ function Maquinas() {
   const [RegistrosTotal, setRegistrosTotal] = useState(0);
   const [Pagina, setPagina] = useState(1);
   const [Paginas, setPaginas] = useState([]);
-  const [Maquinas, setMaquinas] = useState(null);
-
+  const [Gimnasios, setGimnasios] = useState([]);
+  const [Proveedores, setProveedores] = useState([]);
 
   useEffect(() => {
-    async function BuscarMaquinas() {
-      let data = await MaquinasService.Buscar();
-      setMaquinas(data);
-    }
-    BuscarMaquinas();
+    BuscarGimnasios();
+    BuscarProveedores();
   }, []);
+
+  async function BuscarGimnasios() {
+    try {
+      const data = await MaquinasService.BuscarGimnasios();
+      setGimnasios(data);
+    } catch (error) {
+      console.log("¡Error! No se pudo buscar datos de gimnasios en el servidor.");
+    }
+  }
+
+  async function BuscarProveedores() {
+    try {
+      const data = await MaquinasService.BuscarProveedores();
+      setProveedores(data);
+    } catch (error) {
+      console.log("¡Error! No se pudo buscar datos de proveedores en el servidor.");
+    }
+  }
 
   async function Buscar(_pagina) {
     if (_pagina && _pagina !== Pagina) {
       setPagina(_pagina);
-    }
-    else {
+    } else {
       _pagina = Pagina;
     }
     modalDialogService.BloquearPantalla(true);
@@ -88,6 +102,7 @@ function Maquinas() {
       Proveedor: 0,
       FechaCreacion: moment(new Date()).format("YYYY-MM-DD"),
       ConStock: true,
+      Eliminado: false
     });
     alert("Preparando el alta de la máquina...");
     console.log(Item);
@@ -182,6 +197,8 @@ function Maquinas() {
             RegistrosTotal,
             Paginas,
             Buscar,
+            Gimnasios, // Asegurarse de pasar los gimnasios
+            Proveedores // Asegurarse de pasar los proveedores
           }}
         />
       )}
@@ -196,7 +213,7 @@ function Maquinas() {
       {/* Formulario de alta/modificacion/consulta */}
       {AccionABMC !== "L" && (
         <MaquinasRegistro
-          {...{ AccionABMC, Maquinas, Item, Grabar, Volver }}
+          {...{ AccionABMC, Gimnasios, Proveedores, Item, Grabar, Volver }}
         />
       )}
     </div>

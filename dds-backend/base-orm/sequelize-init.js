@@ -136,6 +136,11 @@ const Maquina = sequelize.define(
             allowNull: false,
             defaultValue: false // Esto asegura que se inicialice en 0 (false)
         },
+        Eliminado: {
+            type: DataTypes.BOOLEAN,
+            allowNull: false,
+            defaultValue: false // Esto asegura que se inicialice en 0 (false)
+        },
     },
     {
         hooks: {
