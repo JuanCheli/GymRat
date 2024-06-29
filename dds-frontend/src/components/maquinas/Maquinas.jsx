@@ -115,8 +115,8 @@ function Maquinas() {
   async function ActivarDesactivarMaquina(item) {
     modalDialogService.Confirm(
       "Esta seguro que quiere " +
-        (item.Eliminado ? "desactivar" : "activar") +
-        " a la máquina??",
+        (!item.Eliminado ? "desactivar" : "activar") +
+        " a la máquina?",
       undefined,
       undefined,
       undefined,

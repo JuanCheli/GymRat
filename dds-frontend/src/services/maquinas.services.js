@@ -29,5 +29,5 @@ async function Grabar(item) {
   }
 }
 export const MaquinasService = {
-    Buscar,BuscarPorId,ActivarDesactivarStock,Grabar
+    Buscar,BuscarPorId,ActivarDesactivarStock,ActivarDesactivarMaquina,Grabar
 };

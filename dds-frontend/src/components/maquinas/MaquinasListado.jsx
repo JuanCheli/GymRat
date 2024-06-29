@@ -6,6 +6,7 @@ export default function MaquinasListado({
   Consultar,
   Modificar,
   ActivarDesactivarStock,
+  ActivarDesactivarMaquina,
   Imprimir,
   Pagina,
   RegistrosTotal,
@@ -77,19 +78,19 @@ export default function MaquinasListado({
                               <button
                                 className={
                                   "btn btn-sm " +
-                                  (Item.Eliminado
+                                  (!Item.Eliminado
                                     ? "btn-outline-danger"
                                     : "btn-outline-success")
                                 }
                                 title={
-                                  Item.Eliminado ? "Desactivada" : "Activada"
+                                  !Item.Eliminado ? "Desactivada" : "Activada"
                                 }
                                 onClick={() => ActivarDesactivarMaquina(Item)}
                               >
                                 <i
                                   className={
                                     "fa fa-" +
-                                    (Item.Eliminado ? "times" : "check")
+                                    (!Item.Eliminado ? "times" : "check")
                                   }
                                 ></i>
                               </button>
