@@ -53,7 +53,6 @@ function ModalDialog() {
     };
   }, []);
 
-  let classHeader = "";
   let faIcon = "";
   switch (tipo) {
     case "success":

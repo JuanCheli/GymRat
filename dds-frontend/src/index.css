@@ -233,26 +233,25 @@ tbody td {
 /* ESTILOS VENTANAS DE ALERTA */
 
 @keyframes progressAnimation {
-  0% {
-    width: 0;
+  0%, 100% {
+    opacity: 1;
   }
-  100% {
-    width: 100%;
+  50% {
+    opacity: 0.4;
   }
 }
 
 .demo {
   background: linear-gradient(to right, #7e7683, #cccccc, #7e7683);
-  animation: progressAnimation 2s ease-in-out forwards;
+  animation: progressAnimation 1.5s ease-in-out infinite;
 }
 
 .progress {
   background: #262626;
-  border-radius: 20px;
-  height: 20px;
   border-top: 1px solid #000;
   box-shadow: 0 5px 4px -6px #aaa;
-  margin-top: 50px;
+  margin-top: 20px;
+  margin-bottom: 20px;
   overflow: visible;
 }
 
@@ -288,6 +287,8 @@ tbody td {
   background-color: #000 !important;
   border: 1px solid #fff !important;
   justify-content: center !important;
+  font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+  font-weight: bold;
 }
 
 /* Estilo para los botones en el footer del modal */
