@@ -17,8 +17,11 @@ router.get("/api/maquinas", async function (req, res, next) {
         attributes: [
             "IdMaquina",
             "Nombre",
+            "IdGimnasio",
+            "IdProveedor",
             "FechaCreacion",
             "ConStock",
+            "Eliminado"
         ],
         where,
         offset: (Pagina - 1) * TamañoPagina,
@@ -52,7 +55,8 @@ router.get("/api/maquinas/filtro", async function (req, res, next) {
                 "IdGimnasio",
                 "IdProveedor",
                 "FechaCreacion",
-                "ConStock"
+                "ConStock",
+                "Eliminado"
             ],
             where: whereClause,
             limit: limit,
@@ -81,7 +85,8 @@ router.get("/api/maquinas/:id", async function (req, res, next) {
             "IdGimnasio",
             "IdProveedor",
             "FechaCreacion",
-            "ConStock"
+            "ConStock",
+            "Eliminado"
         ],
         where: { IdMaquina: req.params.id },
     });
@@ -136,6 +141,7 @@ router.put("/api/maquinas/:id", async (req, res) => {
                 "IdProveedor",
                 "FechaCreacion",
                 "ConStock",
+                "Eliminado"
             ],
             where: { IdMaquina: req.params.id },
         });
@@ -199,6 +205,49 @@ router.delete("/api/maquinas/:id", async (req, res) => {
                 // si son errores desconocidos, los dejamos que los controle el middleware de errores
                 throw err;
             }
+        }
+    }
+});
+
+
+/* FUNCION PARA QUE FUNCIONE EL ACTIVARDESACTIVARSTOCK */
+router.patch("/api/maquinas/:id", async (req, res) => {
+    // #swagger.tags = ['maquinas']
+    // #swagger.summary = 'actualiza el estado de stock de una máquina'
+    // #swagger.parameters['id'] = { description: 'identificador de la máquina' }
+    /* #swagger.parameters['ConStock'] = {
+                  in: 'body',
+                  description: 'estado de stock de la máquina',
+                  schema: { ConStock: true }
+      } */
+    try {
+        const { ConStock } = req.body;
+        const id = req.params.id;
+
+        // Verificar si la máquina existe
+        let item = await db.Maquina.findOne({
+            where: { IdMaquina: id }
+        });
+
+        if (!item) {
+            res.status(404).json({ message: "Máquina no encontrada" });
+            return;
+        }
+
+        // Actualizar el campo ConStock
+        item.ConStock = ConStock;
+        await item.save();
+        
+        res.status(200).json({ message: "Estado de stock actualizado correctamente" });
+    } catch (err) {
+        if (err instanceof ValidationError) {
+            // si son errores de validación, los devolvemos
+            let messages = '';
+            err.errors.forEach((x) => messages += (x.path ?? 'campo') + ": " + x.message + '\n');
+            res.status(400).json({ message: messages });
+        } else {
+            // si son errores desconocidos, los dejamos que los controle el middleware de errores
+            throw err;
         }
     }
 });

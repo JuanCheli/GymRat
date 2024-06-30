@@ -6,12 +6,41 @@ export default function MaquinasListado({
   Consultar,
   Modificar,
   ActivarDesactivarStock,
+  ActivarDesactivarMaquina,
+  Gimnasios,
+  Proveedores,
   Imprimir,
-  Pagina,
   RegistrosTotal,
+  Pagina,
   Paginas,
   Buscar,
 }) {
+  // Log para verificar los datos recibidos
+  //console.log("Gimnasios:", Gimnasios);
+  //console.log("Proveedores:", Proveedores);
+
+  function getNombreProveedor(IdProveedor) {
+    //console.log("IdProveedor:", IdProveedor);
+    if (!Proveedores || Proveedores.length === 0) {
+      console.log("No Proveedores found");
+      return IdProveedor;
+    }
+    const Proveedor = Proveedores.find((g) => g.IdProveedor === IdProveedor);
+    //console.log("Proveedor found:", Proveedor);
+    return Proveedor ? Proveedor.Nombre : IdProveedor;
+  }
+
+  function getNombreGimnasio(IdGimnasio) {
+    //console.log("IdGimnasio:", IdGimnasio);
+    if (!Gimnasios || Gimnasios.length === 0) {
+      console.log("No Gimnasios found");
+      return IdGimnasio;
+    }
+    const gimnasio = Gimnasios.find((g) => g.IdGimnasio === IdGimnasio);
+    //console.log("Gimnasio found:", gimnasio);
+    return gimnasio ? gimnasio.Nombre : IdGimnasio;
+  }
+
   return (
     <section className="intro">
       <div className="tabla">
@@ -27,7 +56,7 @@ export default function MaquinasListado({
                         <th className="text-center">Nombre</th>
                         <th className="text-center">Gimnasio</th>
                         <th className="text-center">Proveedor</th>
-                        <th className="text-center">FechaCreacion</th>
+                        <th className="text-center">Fecha Creacion</th>
                         <th className="text-center">Con Stock</th>
                         <th className="text-center text-nowrap">Acciones</th>
                       </tr>
@@ -37,8 +66,12 @@ export default function MaquinasListado({
                         Items.map((Item) => (
                           <tr key={Item.IdMaquina}>
                             <td>{Item.Nombre}</td>
-                            <td className="text-end">{Item.IdGimnasio}</td>
-                            <td className="text-end">{Item.IdProveedor}</td>
+                            <td className="text-end">
+                              {getNombreGimnasio(Item.IdGimnasio)}
+                            </td>
+                            <td className="text-end">
+                              {getNombreProveedor(Item.IdProveedor)}
+                            </td>
                             <td className="text-end">
                               {moment(Item.FechaCreacion).format("DD/MM/YYYY")}
                             </td>
@@ -70,10 +103,24 @@ export default function MaquinasListado({
                                 }
                                 onClick={() => ActivarDesactivarStock(Item)}
                               >
+                                <i className={"fa fa-archive"}></i>
+                              </button>
+                              <button
+                                className={
+                                  "btn btn-sm " +
+                                  (!Item.Eliminado
+                                    ? "btn-outline-danger"
+                                    : "btn-outline-success")
+                                }
+                                title={
+                                  !Item.Eliminado ? "Desactivar" : "Activar"
+                                }
+                                onClick={() => ActivarDesactivarMaquina(Item)}
+                              >
                                 <i
                                   className={
                                     "fa fa-" +
-                                    (Item.ConStock ? "times" : "check")
+                                    (!Item.Eliminado ? "times" : "check")
                                   }
                                 ></i>
                               </button>
@@ -89,6 +136,22 @@ export default function MaquinasListado({
                         <span className="pyBadge">
                           Registros: {RegistrosTotal}
                         </span>
+                      </div>
+                      <div className="col text-center">
+                        Pagina: &nbsp;
+                        <select
+                          value={Pagina}
+                          onChange={(e) => {
+                            Buscar(e.target.value);
+                          }}
+                        >
+                          {Paginas?.map((x) => (
+                            <option value={x} key={x}>
+                              {x}
+                            </option>
+                          ))}
+                        </select>
+                        &nbsp; de {Paginas?.length}
                       </div>
                       <div className="col">
                         <button
