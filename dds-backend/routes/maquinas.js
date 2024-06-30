@@ -50,6 +50,9 @@ router.get("/api/maquinas/filtro", async function (req, res, next) {
         const items = await db.Maquina.findAndCountAll({
             attributes: [
                 "Nombre",
+                "IdGimnasio",
+                "IdProveedor",
+                "FechaCreacion",
                 "ConStock"
             ],
             where: whereClause,
@@ -148,7 +151,7 @@ router.put("/api/maquinas/:id", async (req, res) => {
         item.IdGimnasio = req.body.IdGimnasio,
         item.IdProveedor = req.body.IdProveedor,
         item.FechaCreacion = req.body.FechaCreacion,
-        item.conStock = req.body.ConStock,
+        item.ConStock = req.body.ConStock,
         await item.save();
         res.sendStatus(204);
 
