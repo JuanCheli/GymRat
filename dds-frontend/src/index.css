@@ -16,8 +16,8 @@ body {
 .container {
   position: relative;
   border: 2px solid #6f11c786;
+  height: 600px;
   overflow: auto;
-  margin-top: auto
 }
 
 .centered-element {
