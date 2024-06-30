@@ -22,6 +22,11 @@ const Gimnasio = sequelize.define(
                     args: [3, 30],
                     msg: "Nombre debe ser entre 3 y 30 caracteres",
                 },
+            
+            },
+            unique: {
+                args: true,
+                msg: "Este nombre ya existe en la tabla!"
             },
         },
         FechaAlta: {
@@ -134,7 +139,7 @@ const Maquina = sequelize.define(
         ConStock: {
             type: DataTypes.BOOLEAN,
             allowNull: false,
-            defaultValue: false // Esto asegura que se inicialice en 0 (false)
+            defaultValue: true // Esto asegura que se inicialice en 1 (true)
         },
         Eliminado: {
             type: DataTypes.BOOLEAN,

@@ -69,7 +69,6 @@ router.put("/api/gimnasios/:id", async (req, res) => {
         "IdGimnasio",
         "Nombre",
         "FechaAlta",
-        "Eliminado"
       ],
       where: { IdGimnasio: req.params.id },
     });
@@ -79,8 +78,7 @@ router.put("/api/gimnasios/:id", async (req, res) => {
     }
     item.idGimnasio = req.body.idGimnasio
     item.Nombre = req.body.Nombre,
-    item.FechaAlta = req.body.FechaAlta,
-    item.Eliminado = req.body.Eliminado,
+    item.FechaAlta = req.body.FechaAlta
     await item.save();
     res.sendStatus(204);
 

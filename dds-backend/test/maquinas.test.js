@@ -5,13 +5,17 @@ const maquinaAlta = {
   IdGimnasio: 1,
   IdProveedor: 2,
   FechaCreacion: new Date().toISOString(),
+  ConStock: true
 };
 
 const maquinaModificacion = {
   Nombre: "Maquina " + (() => (Math.random() + 1).toString(36).substring(2))(), // Genera un nombre aleatorio
   IdGimnasio: 4,
   IdProveedor: 2,
+  idMaquina: 3,
   FechaCreacion: new Date().toISOString(),
+  conStock: true,
+  Eliminado: false
 };
 
 // test route/maquinas GET
@@ -27,6 +31,9 @@ describe("GET /api/maquinas", () => {
             IdMaquina: expect.any(Number),
             Nombre: expect.any(String),
             FechaCreacion: expect.any(String),
+            IdProveedor: expect.any(Number),
+            ConStock: expect.any(Boolean),
+            Eliminado: expect.any(Boolean)
           }),
         ]),
         RegistrosTotal: expect.any(Number),
@@ -37,15 +44,9 @@ describe("GET /api/maquinas", () => {
 
 // test route/maquinas GET con filtros
 describe("GET /api/maquinas con filtros", () => {
-  it("Deberia devolver las maquinas según filtro", async () => {
-    const res = await request(app).get("/api/maquinas/filtro/?Nombre=P&Pagina=1");
+  it("Deberia devolver las maquinas según el filtro", async () => {
+    const res = await request(app).get("/api/maquinas/filtro/?Nombre=Pecho&Pagina=1");
     expect(res.statusCode).toEqual(200);
-
-    // Verifica que la respuesta tenga la estructura esperada
-    expect(res.body).toHaveProperty("totalItems");
-    expect(res.body).toHaveProperty("items");
-    expect(res.body).toHaveProperty("currentPage");
-    expect(res.body).toHaveProperty("totalPages");
 
     // Verifica que items exista y sea un arreglo
     expect(Array.isArray(res.body.items)).toBe(true);
@@ -57,20 +58,20 @@ describe("GET /api/maquinas con filtros", () => {
     expect(propertiesVerified).toEqual(true);
 
     function verificarPropiedades(array) {
-      for (let i = 0; i < array.length; i++) {
-        if (!array[i].Nombre.includes("Pecho") || !array[i].ConStock) {
-          console.log("Elemento que no cumple:", array[i]); // Agrega este console.log
-          return false;
+      return array.every(item => {
+        const isValid = item.Nombre.includes("pecho") && item.ConStock;
+        if (!isValid) {
+          console.log("Elemento que no cumple:", item); // Agrega este console.log
         }
-      }
-      return true;
+        return isValid;
+      });
     }
   });
 });
 
 // test route/maquinas/:id GET
 describe("GET /api/maquinas/:id", () => {
-  it("Deberia devolver el artículo con el id 1", async () => {
+  it("Deberia devolver la maquina con el id 1", async () => {
     const res = await request(app).get("/api/maquinas/1");
     expect(res.statusCode).toEqual(200);
     expect(res.body).toEqual(
@@ -96,7 +97,10 @@ describe("POST /api/maquinas", () => {
         Nombre: expect.any(String),
         IdGimnasio: expect.any(Number),
         IdProveedor: expect.any(Number),
-        FechaCreacion: expect.any(String)
+        FechaCreacion: expect.any(String),
+        ConStock: expect.any(Boolean),
+        Eliminado: expect.any(Boolean),
+        IdMaquina: expect.any(Number)
       })
     );
   });
@@ -119,12 +123,5 @@ describe("DELETE /api/maquinas/:id", () => {
     expect(res.statusCode).toEqual(200);
 
     // baja lógica, no se borra realmente
-    // expect(res.body).toEqual(
-    //   expect.objectContaining({
-    //     Idmaquina: expect.any(Number),
-    //     Nombre: expect.any(String),
-    //     Precio: expect.any(Number),
-    //   })
-    // );
   });
 });

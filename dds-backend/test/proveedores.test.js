@@ -13,7 +13,8 @@ const proveedoresModificacion = {
     Pais: "Pais" + (() => (Math.random() + 1).toString(36).substring(2))(),
     Telefono: "Telefono" + (() => (Math.random() + 1).toString(36).substring(2))(),
     FechaAltaEmpresa: new Date().toISOString(),
-    Eliminado: false
+    Eliminado: false,
+    IdProveedor: 2
 };
 
 // test route/proveedores GET
@@ -42,7 +43,7 @@ describe("GET /api/proveedores", function () {
 
 // test route/proveedores/:id GET
 describe("GET /api/proveedores/:id", function () {
-    it("respond with json containing a single proveedores", async function () {
+    it("Deberia devolver el proveedor con el id 1", async function () {
         const res = await request(app)
             .get("/api/proveedores/1");
         expect(res.statusCode).toEqual(200);
@@ -59,7 +60,7 @@ describe("GET /api/proveedores/:id", function () {
 });
 
 
-// test route/maquinas POST
+// test route/proveedores POST
 describe("POST /api/proveedores", () => {
     it("Deberia devolver el proveedor que acabo de crear", async () => {
         const res = await request(app).post("/api/proveedores").send(proveedoresAlta);
@@ -75,7 +76,7 @@ describe("POST /api/proveedores", () => {
     });
 });
 
-// test route/maquinas/:id PUT
+// test route/proveedores/:id PUT
 describe("PUT /api/proveedores/:id", () => {
     it("Deberia devolver el proveedor con el id 1 modificado", async () => {
         const res = await request(app)
@@ -85,20 +86,13 @@ describe("PUT /api/proveedores/:id", () => {
     });
 });
 
-// test route/maquinas/:id DELETE
+// test route/proveedores/:id DELETE
 describe("DELETE /api/proveedores/:id", () => {
     it("Debería devolver el proveedor con el id 1 borrado", async () => {
         const res = await request(app).delete("/api/proveedores/1");
         expect(res.statusCode).toEqual(200);
 
         // baja lógica, no se borra realmente
-        // expect(res.body).toEqual(
-        //   expect.objectContaining({
-        //     Idmaquina: expect.any(Number),
-        //     Nombre: expect.any(String),
-        //     Precio: expect.any(Number),
-        //   })
-        // );
     });
 });
 

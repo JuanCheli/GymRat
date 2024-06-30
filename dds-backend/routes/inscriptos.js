@@ -21,6 +21,7 @@ router.get("/api/inscriptos/:id", async function (req, res, next) {
       "Nombre",
       "FechaInscripcion",
       "IdGimnasio",
+      "Eliminado"
     ],
     where: { IdInscripto: req.params.id },
   });

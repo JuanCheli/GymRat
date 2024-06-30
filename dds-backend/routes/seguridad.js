@@ -21,13 +21,13 @@ router.post("/api/login", (req, res) => {
 
   const { usuario, clave } = req.body;
 
-  // Filter user from the users array by usuario and clave
+  // Filtra los usuarios del array por usuario y clave
   const user = users.find((u) => {
     return u.usuario === usuario && u.clave === clave;
   });
 
   if (user) {
-    // Generate an access token
+    // Genera un token de acceso
     const accessToken = jwt.sign(
       { usuario: user.usuario, rol: user.rol },
       auth.accessTokenSecret,

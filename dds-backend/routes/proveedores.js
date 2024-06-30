@@ -21,6 +21,7 @@ router.get("/api/proveedores/:id", async function (req, res, next) {
       "Pais",
       "Telefono",
       "FechaAltaEmpresa",
+      "Eliminado"
     ],
     where: { IdProveedor: req.params.id },
   });
@@ -32,7 +33,7 @@ router.post("/api/proveedores/", async (req, res) => {
   // #swagger.summary = 'agrega un Proveedor'
   /*    #swagger.parameters['item'] = {
                 in: 'body',
-                description: 'nueva Artículo',
+                description: 'nueva Pro',
                 schema: { $ref: '#/definitions/proveedores' }
     } */
   try {
@@ -58,8 +59,8 @@ router.post("/api/proveedores/", async (req, res) => {
 
 router.put("/api/proveedores/:id", async (req, res) => {
   // #swagger.tags = ['proveedores']
-  // #swagger.summary = 'actualiza un Artículo'
-  // #swagger.parameters['id'] = { description: 'identificador del Artículo...' }
+  // #swagger.summary = 'actualiza un Pro'
+  // #swagger.parameters['id'] = { description: 'identificador del Pro...' }
   /*    #swagger.parameters['Proveedor'] = {
                 in: 'body',
                 description: 'Proveedor a actualizar',
@@ -74,7 +75,6 @@ router.put("/api/proveedores/:id", async (req, res) => {
             "Pais",
             "Telefono",
             "FechaAltaEmpresa",
-            "Eliminado"
           ],
       where: { IdProveedor: req.params.id },
     });
@@ -86,8 +86,7 @@ router.put("/api/proveedores/:id", async (req, res) => {
     item.Nombre = req.body.Nombre,
     item.Pais = req.body.Pais,
     item.Telefono = req.body.Telefono
-    item.FechaAltaEmpresa = req.body.FechaAltaEmpresa,
-    item.Eliminado = req.body.Eliminado,
+    item.FechaAltaEmpresa = req.body.FechaAltaEmpresa
     await item.save();
     res.sendStatus(204);
 

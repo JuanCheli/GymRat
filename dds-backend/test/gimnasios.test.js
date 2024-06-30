@@ -10,7 +10,6 @@ const gimnasioModificacion = {
   Nombre: "Maquina " + (() => (Math.random() + 1).toString(36).substring(2))(), // Genera un nombre aleatorio
   IdGimnasio: 4,
   FechaAlta: new Date().toISOString(),
-  Eliminado: false
 };
 
 // test route/gimnasios GET
@@ -36,7 +35,7 @@ describe("GET /api/gimnasios", function () {
 
 // test route/gimnasios/:id GET
 describe("GET /api/gimnasios/:id", function () {
-  it("respond with json containing a single gimnasios", async function () {
+  it("Devolveria el gimnasio con el id 1", async function () {
     const res = await request(app)
       .get("/api/gimnasios/1");
     expect(res.statusCode).toEqual(200);
@@ -50,7 +49,7 @@ describe("GET /api/gimnasios/:id", function () {
 });
 
 
-// test route/maquinas POST
+// test route/gimnasios POST
 describe("POST /api/gimnasios", () => {
   it("Deberia devolver el gimnasio que acabo de crear", async () => {
     const res = await request(app).post("/api/gimnasios").send(gimnasioAlta);
@@ -64,7 +63,7 @@ describe("POST /api/gimnasios", () => {
   });
 });
 
-// test route/maquinas/:id PUT
+// test route/gimnasios/:id PUT
 describe("PUT /api/gimnasios/:id", () => {
   it("Deberia devolver el gimnasio con el id 1 modificado", async () => {
     const res = await request(app)
@@ -74,19 +73,12 @@ describe("PUT /api/gimnasios/:id", () => {
   });
 });
 
-// test route/maquinas/:id DELETE
+// test route/gimnasios/:id DELETE
 describe("DELETE /api/gimnasios/:id", () => {
   it("Debería devolver el gimnasio con el id 1 borrado", async () => {
     const res = await request(app).delete("/api/gimnasios/1");
     expect(res.statusCode).toEqual(200);
 
     // baja lógica, no se borra realmente
-    // expect(res.body).toEqual(
-    //   expect.objectContaining({
-    //     Idmaquina: expect.any(Number),
-    //     Nombre: expect.any(String),
-    //     Precio: expect.any(Number),
-    //   })
-    // );
   });
 });

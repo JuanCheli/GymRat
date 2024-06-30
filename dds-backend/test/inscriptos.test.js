@@ -10,6 +10,7 @@ const inscriptosAlta = {
 const inscriptosModificacion = {
     Nombre: "Nombre " + (() => (Math.random() + 1).toString(36).substring(2))(), // Genera un nombre aleatorio
     IdGimnasio: 1,
+    idInscripto: 2,
     FechaInscripcion: new Date().toISOString(),
 };
 
@@ -38,7 +39,7 @@ describe("GET /api/inscriptos", function () {
 
 // test route/inscriptos/:id GET
 describe("GET /api/inscriptos/:id", function () {
-    it("respond with json containing a single inscriptos", async function () {
+    it("Devolveria el inscripto con el id 1", async function () {
         const res = await request(app)
             .get("/api/inscriptos/1");
         expect(res.statusCode).toEqual(200);
@@ -54,9 +55,9 @@ describe("GET /api/inscriptos/:id", function () {
 });
 
 
-// test route/maquinas POST
+// test route/inscriptos POST
 describe("POST /api/inscriptos", () => {
-    it("Deberia devolver el proveedor que acabo de crear", async () => {
+    it("Deberia devolver el inscripto que acabo de crear", async () => {
         const res = await request(app).post("/api/inscriptos").send(inscriptosAlta);
         expect(res.statusCode).toEqual(200);
         expect(res.body).toEqual(
@@ -69,9 +70,9 @@ describe("POST /api/inscriptos", () => {
     });
 });
 
-// test route/maquinas/:id PUT
+// test route/inscriptos/:id PUT
 describe("PUT /api/inscriptos/:id", () => {
-    it("Deberia devolver el proveedor con el id 1 modificado", async () => {
+    it("Deberia devolver el inscripto con el id 1 modificado", async () => {
         const res = await request(app)
             .put("/api/inscriptos/1")
             .send(inscriptosModificacion);
@@ -79,20 +80,13 @@ describe("PUT /api/inscriptos/:id", () => {
     });
 });
 
-// test route/maquinas/:id DELETE
+// test route/inscriptos/:id DELETE
 describe("DELETE /api/inscriptos/:id", () => {
-    it("Debería devolver el proveedor con el id 1 borrado", async () => {
+    it("Debería devolver el inscripto con el id 1 borrado", async () => {
         const res = await request(app).delete("/api/inscriptos/1");
         expect(res.statusCode).toEqual(200);
 
         // baja lógica, no se borra realmente
-        // expect(res.body).toEqual(
-        //   expect.objectContaining({
-        //     Idmaquina: expect.any(Number),
-        //     Nombre: expect.any(String),
-        //     Precio: expect.any(Number),
-        //   })
-        // );
     });
 });
 
