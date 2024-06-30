@@ -19,7 +19,7 @@ async function CrearBaseSiNoExiste() {
     );
     console.log("tabla usuarios creada!");
     await db.run(
-      "insert into usuarios values (1,'admin','123','admin'),(2,'juan','123','member');"
+      "insert into usuarios values (1,'gimnasio','123','admin'),(2,'inscripto','123','member');"
     );
   }
 

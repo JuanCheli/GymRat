@@ -13,15 +13,14 @@ router.get("/api/inscriptos", async function (req, res, next) {
 
 router.get("/api/inscriptos/:id", async function (req, res, next) {
   // #swagger.tags = ['inscriptos']
-  // #swagger.summary = 'obtiene un Articulo'
-  // #swagger.parameters['id'] = { description: 'identificador del Articulo...' }
+  // #swagger.summary = 'obtiene un Inscripto'
+  // #swagger.parameters['id'] = { description: 'identificador del Inscripto...' }
   let items = await db.Inscripto.findOne({
     attributes: [
       "IdInscripto",
       "Nombre",
       "FechaInscripcion",
       "IdGimnasio",
-      "Eliminado"
     ],
     where: { IdInscripto: req.params.id },
   });
@@ -30,10 +29,10 @@ router.get("/api/inscriptos/:id", async function (req, res, next) {
 
 router.post("/api/inscriptos/", async (req, res) => {
   // #swagger.tags = ['inscriptos']
-  // #swagger.summary = 'agrega un Articulo'
+  // #swagger.summary = 'agrega un Inscripto'
   /*    #swagger.parameters['item'] = {
                 in: 'body',
-                description: 'nueva Artículo',
+                description: 'nuevo Inscripto',
                 schema: { $ref: '#/definitions/inscriptos' }
     } */
   try {
@@ -58,11 +57,11 @@ router.post("/api/inscriptos/", async (req, res) => {
 
 router.put("/api/inscriptos/:id", async (req, res) => {
   // #swagger.tags = ['inscriptos']
-  // #swagger.summary = 'actualiza un Artículo'
-  // #swagger.parameters['id'] = { description: 'identificador del Artículo...' }
-  /*    #swagger.parameters['Articulo'] = {
+  // #swagger.summary = 'actualiza un Inscripto'
+  // #swagger.parameters['id'] = { description: 'identificador del Inscripto...' }
+  /*    #swagger.parameters['Inscripto'] = {
                 in: 'body',
-                description: 'Articulo a actualizar',
+                description: 'Inscripto a actualizar',
                 schema: { $ref: '#/definitions/inscriptos' }
     } */
 
@@ -102,8 +101,8 @@ router.put("/api/inscriptos/:id", async (req, res) => {
 
 router.delete("/api/inscriptos/:id", async (req, res) => {
   // #swagger.tags = ['inscriptos']
-  // #swagger.summary = 'elimina un Articulo'
-  // #swagger.parameters['id'] = { description: 'identificador del Articulo.' }
+  // #swagger.summary = 'elimina un Inscripto'
+  // #swagger.parameters['id'] = { description: 'identificador del Inscripto.' }
 
   let bajaFisica = false;
 

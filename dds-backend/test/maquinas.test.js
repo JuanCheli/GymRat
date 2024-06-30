@@ -35,23 +35,36 @@ describe("GET /api/maquinas", () => {
   });
 });
 
-// test route/maquinas GET
+// test route/maquinas GET con filtros
 describe("GET /api/maquinas con filtros", () => {
-  it("Deberia devolver las maquinas según filtro ", async () => {
-    const res = await request(app).get("/api/maquinas/filtro/?Nombre=Pecho&Pagina=1");
+  it("Deberia devolver las maquinas según filtro", async () => {
+    const res = await request(app).get("/api/maquinas/filtro/?Nombre=P&Pagina=1");
     expect(res.statusCode).toEqual(200);
 
-    expect(verificarPropiedades(res.body.Items) ).toEqual(true );
-  
+    // Verifica que la respuesta tenga la estructura esperada
+    expect(res.body).toHaveProperty("totalItems");
+    expect(res.body).toHaveProperty("items");
+    expect(res.body).toHaveProperty("currentPage");
+    expect(res.body).toHaveProperty("totalPages");
+
+    // Verifica que items exista y sea un arreglo
+    expect(Array.isArray(res.body.items)).toBe(true);
+
+    // Verifica las propiedades de los elementos individuales
+    const propertiesVerified = verificarPropiedades(res.body.items);
+    console.log("Propiedades verificadas:", propertiesVerified); // Agrega este console.log
+
+    expect(propertiesVerified).toEqual(true);
+
     function verificarPropiedades(array) {
       for (let i = 0; i < array.length; i++) {
-        if ( !array[i].Nombre.includes("Pecho") || !array[i].ConStock ) {
+        if (!array[i].Nombre.includes("Pecho") || !array[i].ConStock) {
+          console.log("Elemento que no cumple:", array[i]); // Agrega este console.log
           return false;
         }
       }
       return true;
     }
-    
   });
 });
 

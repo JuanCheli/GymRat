@@ -1,8 +1,8 @@
 const request = require("supertest");
 const app = require("../index");
 
-const usuarioAdmin = { usuario: "admin", clave: "123" };
-const usuarioMiembro = { usuario: "juan", clave: "123" };
+const usuarioAdmin = { usuario: "gimnasio", clave: "123" };
+const usuarioMiembro = { usuario: "inscripto", clave: "123" };
 
 
 describe("POST /api/login admin", function () {
@@ -18,28 +18,27 @@ describe("POST /api/login admin", function () {
 
   it("Devolvería el token para usuario admin", async function () {
     const res = await request(app).post("/api/login").send(usuarioAdmin);
-
     expect(res.statusCode).toEqual(200);
     expect(res.body.accessToken).toEqual(expect.any(String));
   });
 });
 
-describe("GET /api/maquinasJWT", () => {
+describe("GET /api/inscriptosJWT", () => {
 
   it("Devolveria error, porque falta token de autorización", async function () {
-    const res = await request(app).get("/api/maquinasJWT");
+    const res = await request(app).get("/api/inscriptosJWT");
     expect(res.statusCode).toEqual(401);
     expect(res.body.message).toEqual("Acceso denegado");
   });
 
   it("Devolveria error, porque el token no es válido", async function () {
-    const res = await request(app).get("/api/maquinasJWT")
+    const res = await request(app).get("/api/inscriptosJWT")
     .set("Authorization", 'Bearer invalido');
     expect(res.statusCode).toEqual(403);
     expect(res.body.message).toEqual("token no es valido");
   });
 
-  it("Devolvería todos los maquinas, solo autorizado para administradores", async function () {
+  it("Devolvería todos los inscriptos, solo autorizado para administradores", async function () {
     const res1 = await request(app)
     .post("/api/login")
     .set("Content-type", "application/json")
@@ -48,19 +47,17 @@ describe("GET /api/maquinasJWT", () => {
     let token = res1.body.accessToken;
 
     const res = await request(app)
-      .get("/api/maquinasJWT")
+      .get("/api/inscriptosJWT")
       .set("Authorization", `Bearer ${token}`);
 
     expect(res.statusCode).toEqual(200);
     expect(res.body).toEqual(
       expect.arrayContaining([
         expect.objectContaining({
-          IdMaquina: expect.any(Number),
+          IdInscripto: expect.any(Number),
           Nombre: expect.any(String),
-          Gimnasio: expect.any(Number),
-          Proveedor: expect.any(Number),
-          FechaCreacion: expect.any(String),
-          Eliminado: expect.any(Boolean)
+          IdGimnasio: expect.any(Number),
+          FechaInscripcion: expect.any(String)
         }),
       ])
     );
@@ -75,11 +72,11 @@ describe("GET /api/maquinasJWT", () => {
     let token = res1.body.accessToken;
 
     const res = await request(app)
-      .get("/api/maquinasJWT")
+      .get("/api/inscriptosJWT")
       .set("Authorization", `Bearer ${token}`);
 
     expect(res.statusCode).toEqual(403);
-    expect(res.body.message).toEqual('usuario no autorizado!');
+    expect(res.body.message).toEqual('Usuario no autorizado!');
   });
 
 });

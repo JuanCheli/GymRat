@@ -12,8 +12,8 @@ router.get("/api/proveedores", async function (req, res, next) {
 
 router.get("/api/proveedores/:id", async function (req, res, next) {
   // #swagger.tags = ['proveedores']
-  // #swagger.summary = 'obtiene un Articulo'
-  // #swagger.parameters['id'] = { description: 'identificador del Articulo...' }
+  // #swagger.summary = 'obtiene un Proveedor'
+  // #swagger.parameters['id'] = { description: 'identificador del Proveedor...' }
   let items = await db.Proveedor.findOne({
     attributes: [
       "IdProveedor",
@@ -29,7 +29,7 @@ router.get("/api/proveedores/:id", async function (req, res, next) {
 
 router.post("/api/proveedores/", async (req, res) => {
   // #swagger.tags = ['proveedores']
-  // #swagger.summary = 'agrega un Articulo'
+  // #swagger.summary = 'agrega un Proveedor'
   /*    #swagger.parameters['item'] = {
                 in: 'body',
                 description: 'nueva Artículo',
@@ -60,9 +60,9 @@ router.put("/api/proveedores/:id", async (req, res) => {
   // #swagger.tags = ['proveedores']
   // #swagger.summary = 'actualiza un Artículo'
   // #swagger.parameters['id'] = { description: 'identificador del Artículo...' }
-  /*    #swagger.parameters['Articulo'] = {
+  /*    #swagger.parameters['Proveedor'] = {
                 in: 'body',
-                description: 'Articulo a actualizar',
+                description: 'Proveedor a actualizar',
                 schema: { $ref: '#/definitions/proveedores' }
     } */
 
@@ -106,8 +106,8 @@ router.put("/api/proveedores/:id", async (req, res) => {
 
 router.delete("/api/proveedores/:id", async (req, res) => {
   // #swagger.tags = ['proveedores']
-  // #swagger.summary = 'elimina un Articulo'
-  // #swagger.parameters['id'] = { description: 'identificador del Articulo.' }
+  // #swagger.summary = 'elimina un Proveedor'
+  // #swagger.parameters['id'] = { description: 'identificador del Proveedor.' }
 
   let bajaFisica = false;
 

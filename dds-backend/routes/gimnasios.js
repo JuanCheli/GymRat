@@ -12,8 +12,8 @@ router.get("/api/gimnasios", async function (req, res, next) {
 
 router.get("/api/gimnasios/:id", async function (req, res, next) {
   // #swagger.tags = ['gimnasios']
-  // #swagger.summary = 'obtiene un Articulo'
-  // #swagger.parameters['id'] = { description: 'identificador del Articulo...' }
+  // #swagger.summary = 'obtiene un Gimnasio'
+  // #swagger.parameters['id'] = { description: 'identificador del Gimnasio...' }
   let items = await db.Gimnasio.findOne({
     attributes: [
       "IdGimnasio",
@@ -28,7 +28,7 @@ router.get("/api/gimnasios/:id", async function (req, res, next) {
 
 router.post("/api/gimnasios/", async (req, res) => {
   // #swagger.tags = ['gimnasios']
-  // #swagger.summary = 'agrega un Articulo'
+  // #swagger.summary = 'agrega un Gimnasio'
   /*    #swagger.parameters['item'] = {
                 in: 'body',
                 description: 'nueva Artículo',
@@ -55,11 +55,11 @@ router.post("/api/gimnasios/", async (req, res) => {
 
 router.put("/api/gimnasios/:id", async (req, res) => {
   // #swagger.tags = ['gimnasios']
-  // #swagger.summary = 'actualiza un Artículo'
-  // #swagger.parameters['id'] = { description: 'identificador del Artículo...' }
-  /*    #swagger.parameters['Articulo'] = {
+  // #swagger.summary = 'actualiza un Gimnasio'
+  // #swagger.parameters['id'] = { description: 'identificador del Gimnasio...' }
+  /*    #swagger.parameters['Gimnasio'] = {
                 in: 'body',
-                description: 'Articulo a actualizar',
+                description: 'Gimnasio a actualizar',
                 schema: { $ref: '#/definitions/gimnasios' }
     } */
 
@@ -99,8 +99,8 @@ router.put("/api/gimnasios/:id", async (req, res) => {
 
 router.delete("/api/gimnasios/:id", async (req, res) => {
   // #swagger.tags = ['gimnasios']
-  // #swagger.summary = 'elimina un Articulo'
-  // #swagger.parameters['id'] = { description: 'identificador del Articulo.' }
+  // #swagger.summary = 'elimina un Gimnasio'
+  // #swagger.parameters['id'] = { description: 'identificador del Gimnasio.' }
 
   let bajaFisica = false;
 

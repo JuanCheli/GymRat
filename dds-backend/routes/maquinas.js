@@ -7,8 +7,8 @@ const { Op, ValidationError } = require("sequelize");
 
 router.get("/api/maquinas", async function (req, res, next) {
     // #swagger.tags = ['maquinas']
-    // #swagger.summary = 'obtiene todos los maquinas'
-    // consulta de artículos con filtros y paginacion
+    // #swagger.summary = 'obtiene todas las maquinas'
+    // consulta de maquinas con filtros y paginacion
 
     let where = {};
     const Pagina = req.query.Pagina ?? 1;
@@ -32,7 +32,6 @@ router.get("/api/maquinas/filtro", async function (req, res, next) {
     // #swagger.tags = ['maquinas']
     // #swagger.summary = 'Obtiene Máquinas con filtros'
     // #swagger.parameters['Nombre'] = { description: 'Parte del nombre de la Máquina' }
-    // #swagger.parameters['Activo'] = { description: 'Estado de la máquina (true o false)' }
     // #swagger.parameters['Pagina'] = { description: 'Número de página' }
     try {
         const { Nombre, Pagina } = req.query;
@@ -73,8 +72,8 @@ router.get("/api/maquinas/filtro", async function (req, res, next) {
 
 router.get("/api/maquinas/:id", async function (req, res, next) {
     // #swagger.tags = ['maquinas']
-    // #swagger.summary = 'obtiene un Articulo'
-    // #swagger.parameters['id'] = { description: 'identificador del Articulo...' }
+    // #swagger.summary = 'obtiene una Maquina'
+    // #swagger.parameters['id'] = { description: 'identificador de la Maquina...' }
     let items = await db.Maquina.findOne({
         attributes: [
             "IdMaquina",
@@ -91,10 +90,10 @@ router.get("/api/maquinas/:id", async function (req, res, next) {
 
 router.post("/api/maquinas/", async (req, res) => {
     // #swagger.tags = ['maquinas']
-    // #swagger.summary = 'agrega un Articulo'
+    // #swagger.summary = 'agrega una Maquina'
     /*    #swagger.parameters['item'] = {
                   in: 'body',
-                  description: 'nueva Artículo',
+                  description: 'nueva Maquina',
                   schema: { $ref: '#/definitions/maquinas' }
       } */
     try {
@@ -110,7 +109,7 @@ router.post("/api/maquinas/", async (req, res) => {
             // si son errores de validación, los devolvemos
             let messages = '';
             err.errors.forEach((x) => messages += (x.path ?? 'campo') + ": " + x.message + '\n');
-            res.status(200).json({ message: messages });
+            res.status(400).json({ message: messages });
         } else {
             // si son errores desconocidos, los dejamos que los controle el middleware de errores
             throw err;
@@ -120,11 +119,11 @@ router.post("/api/maquinas/", async (req, res) => {
 
 router.put("/api/maquinas/:id", async (req, res) => {
     // #swagger.tags = ['maquinas']
-    // #swagger.summary = 'actualiza un Artículo'
-    // #swagger.parameters['id'] = { description: 'identificador del Artículo...' }
-    /*    #swagger.parameters['Articulo'] = {
+    // #swagger.summary = 'actualiza una Maquina'
+    // #swagger.parameters['id'] = { description: 'identificador de la Maquina...' }
+    /*    #swagger.parameters['Maquina'] = {
                   in: 'body',
-                  description: 'Articulo a actualizar',
+                  description: 'Maquina a actualizar',
                   schema: { $ref: '#/definitions/maquinas' }
       } */
 
@@ -168,8 +167,8 @@ router.put("/api/maquinas/:id", async (req, res) => {
 
 router.delete("/api/maquinas/:id", async (req, res) => {
     // #swagger.tags = ['maquinas']
-    // #swagger.summary = 'elimina un Articulo'
-    // #swagger.parameters['id'] = { description: 'identificador del Articulo.' }
+    // #swagger.summary = 'elimina una Maquina'
+    // #swagger.parameters['id'] = { description: 'identificador de la Maquina.' }
 
     let bajaFisica = false;
 
