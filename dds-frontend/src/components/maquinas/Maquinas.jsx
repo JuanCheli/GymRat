@@ -86,7 +86,7 @@ function Maquinas() {
       modalDialogService.Alert("No puede modificarse una máquina con stock.");
       return;
     }
-    if (!item.Eliminado) {
+    if (item.Eliminado) {
       modalDialogService.Alert("No puede modificarse una máquina desactivada.");
       return;
     }
