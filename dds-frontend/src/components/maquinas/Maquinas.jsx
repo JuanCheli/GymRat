@@ -31,7 +31,7 @@ function Maquinas() {
     BuscarGimnasios();
     BuscarProveedores();
   }, []);
-
+  
   async function BuscarGimnasios() {
     try {
       const data = await MaquinasService.BuscarGimnasios();
@@ -57,19 +57,26 @@ function Maquinas() {
       _pagina = Pagina;
     }
     modalDialogService.BloquearPantalla(true);
-    const data = await MaquinasService.Buscar(Nombre, ConStock, _pagina);
-    modalDialogService.BloquearPantalla(false);
-
-    setItems(data.Items);
-    setRegistrosTotal(data.RegistrosTotal);
-
-    //generar array de las paginas para mostrar en select del paginador
-    const arrPaginas = [];
-    for (let i = 1; i <= Math.ceil(data.RegistrosTotal / 10); i++) {
-      arrPaginas.push(i);
+    try {
+      console.log("Buscando con Nombre:", Nombre, "ConStock:", ConStock, "Página:", _pagina);
+      const data = await MaquinasService.Buscar(Nombre, ConStock, _pagina);
+      console.log("Datos recibidos:", data);
+      modalDialogService.BloquearPantalla(false);
+      setItem(data.Item);
+      setItems(data.Items);
+      setRegistrosTotal(data.totalItems);
+      // Generar array de las páginas para mostrar en select del paginador
+      const arrPaginas = [];
+      for (let i = 1; i <= data.totalPages; i++) {
+        arrPaginas.push(i);
+      }
+      setPaginas(arrPaginas);
+    } catch (error) {
+      console.error("Error al buscar:", error);
     }
-    setPaginas(arrPaginas);
   }
+  
+  
 
   async function BuscarPorId(item, accionABMC) {
     const data = await MaquinasService.BuscarPorId(item);
@@ -98,8 +105,8 @@ function Maquinas() {
     setItem({
       IdMaquina: 0,
       Nombre: "",
-      Gimnasio: 0,
-      Proveedor: 0,
+      IdGimnasio: 0,
+      IdProveedor: 0,
       FechaCreacion: moment(new Date()).format("YYYY-MM-DD"),
       ConStock: true,
       Eliminado: false

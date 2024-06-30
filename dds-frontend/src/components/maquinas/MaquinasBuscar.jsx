@@ -1,4 +1,5 @@
 import React from "react";
+
 export default function MaquinasBuscar({
   Nombre,
   setNombre,
@@ -18,7 +19,9 @@ export default function MaquinasBuscar({
             <input
               type="text"
               className="form-control"
-              onChange={(e) => setNombre(e.target.value)}
+              onChange={(e) => {
+                setNombre(e.target.value);
+              }}
               value={Nombre}
               maxLength="55"
               autoFocus
@@ -30,12 +33,14 @@ export default function MaquinasBuscar({
           <div className="col-sm-8 col-md-4">
             <select
               className="form-control"
-              onChange={(e) => setConStock(e.target.value)}
+              onChange={(e) => {
+                setConStock(e.target.value);
+              }}
               value={ConStock}
             >
-              <option value={""}></option>
-              <option value={false}>NO</option>
-              <option value={true}>SI</option>
+              <option value="">Seleccione</option>
+              <option value="false">NO</option>
+              <option value="true">SI</option>
             </select>
           </div>
         </div>
@@ -48,7 +53,10 @@ export default function MaquinasBuscar({
             <button
               type="button"
               className="btn button-64"
-              onClick={() => Buscar(1)}
+              onClick={() => {
+                console.log("Buscar clicado con Nombre:", Nombre, "y ConStock:", ConStock);
+                Buscar(1);
+              }}
             >
               <i className="fa fa-search"> </i> Buscar
             </button>
