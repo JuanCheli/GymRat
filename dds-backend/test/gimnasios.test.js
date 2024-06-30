@@ -7,7 +7,7 @@ const gimnasioAlta = {
 };
 
 const gimnasioModificacion = {
-  Nombre: "Maquina " + (() => (Math.random() + 1).toString(36).substring(2))(), // Genera un nombre aleatorio
+  Nombre: "Gimnasio " + (() => (Math.random() + 1).toString(36).substring(2))(), // Genera un nombre aleatorio
   IdGimnasio: 4,
   FechaAlta: new Date().toISOString(),
 };

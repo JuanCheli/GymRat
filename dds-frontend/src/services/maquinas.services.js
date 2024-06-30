@@ -38,9 +38,15 @@ async function BuscarProveedores() {
 
 
 async function ActivarDesactivarStock(item) {
-  // Cambia el valor de ConStock a su opuesto
   const updatedItem = { ...item, ConStock: !item.ConStock };
-  await axios.patch(urlResource + "/" + item.IdMaquina, updatedItem );
+
+  try {
+    const response = await axios.put(`${urlResource}/${item.IdMaquina}`, updatedItem);
+    console.log("Stock actualizado:", response.data);
+    
+  } catch (error) {
+    console.error("Error al actualizar el stock:", error);
+  }
 }
 
 async function ActivarDesactivarMaquina(item) {
