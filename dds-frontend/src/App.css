@@ -4,6 +4,7 @@
   background-color: #000;
   min-height: 88vh;
   padding: 1rem;
+  overflow: auto;
 }
 
 footer {

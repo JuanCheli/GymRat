@@ -15,9 +15,9 @@ body {
 
 .container {
   position: relative;
-  height: 600px;
   border: 2px solid #6f11c786;
   overflow: auto;
+  margin-top: auto
 }
 
 .centered-element {
@@ -107,16 +107,7 @@ body {
   margin: auto !important;
 }
 
-/* ESTILOS FOOTER */
 
-.footer-container {
-  background: #000;
-  color: #333;
-  font-size: large;
-  font-weight: 400;
-  margin-top: auto;
-  height: 12.5vh;
-}
 
 /* ESTILOS NAV */
 
@@ -323,4 +314,15 @@ tbody td {
     font-size: 14px;
     padding: 12px;
   }
+}
+
+/* ESTILOS FOOTER */
+
+.footer-container {
+  background: #000;
+  color: #333;
+  font-size: large;
+  font-weight: 400;
+  margin-top: auto;
+  height: 12.5vh;
 }
