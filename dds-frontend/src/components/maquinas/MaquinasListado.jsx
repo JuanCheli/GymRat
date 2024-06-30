@@ -47,9 +47,9 @@ export default function MaquinasListado({
         <div className="mask d-flex align-items-center h-100">
           <div className="container">
             <div className="row justify-content-center">
+            <div className="tituloPagina">Máquinas</div>
               <div className="col-12">
                 <div className="table-responsive">
-                  <div className="tituloPagina">Máquinas</div>
                   <table className="table table-dark table-bordered mb-0">
                     <thead>
                       <tr>

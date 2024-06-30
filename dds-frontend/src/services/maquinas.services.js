@@ -6,7 +6,7 @@ const urlGimnasios = config.urlResourceGimnasios
 const urlProveedores = config.urlResourceProveedores
 
 async function Buscar(Nombre, ConStock, _pagina) {
-  const resp = await axios.get((urlResource), {params: Nombre, ConStock, _pagina});
+  const resp = await axios.get(urlResource, {params: Nombre, ConStock, _pagina});
   return resp.data;
 }
 async function BuscarPorId(item) {
