@@ -16,7 +16,7 @@ body {
 .container {
   position: relative;
   border: 2px solid #6f11c786;
-  height: 600px;
+  height: 650px;
   overflow: auto;
 }
 
@@ -185,7 +185,7 @@ nav ul li ul li a:hover {
 
 /* ESTILOS TABLAS */
 .intro {
-  height: 50vh;
+  height: 80vh;
 }
 
 .tabla {
