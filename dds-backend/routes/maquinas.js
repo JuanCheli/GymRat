@@ -25,11 +25,13 @@ router.get("/api/maquinas", async function (req, res, next) {
 
         const items = await db.Maquina.findAndCountAll({
             attributes: [
+                "IdMaquina",
                 "Nombre",
                 "IdGimnasio",
                 "IdProveedor",
                 "FechaCreacion",
-                "ConStock"
+                "ConStock",
+                "Eliminado"
             ],
             where: whereClause,
             limit: limit,
