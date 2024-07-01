@@ -115,7 +115,8 @@ function Maquinas() {
   }
 
   function Imprimir() {
-    alert("En desarrollo...");
+    window.print()
+
   }
 
   async function ActivarDesactivarStock(item) {

@@ -38,7 +38,6 @@ export default function MaquinasBuscar({
               }}
               value={ConStock}
             >
-              <option value="">Seleccione</option>
               <option value="false">NO</option>
               <option value="true">SI</option>
             </select>
