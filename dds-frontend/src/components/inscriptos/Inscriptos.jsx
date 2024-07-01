@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { InscriptosService } from "../../services/inscriptos.services";
 
 function Inscriptos() {
-  const tituloPagina = "Inscriptos (solo para administradores)";
+  const tituloPagina = "Inscriptos (solo para gimnasios)";
   const [inscriptos, setInscriptos] = useState([]);
   const [gimnasios, setGimnasios] = useState([]);
 

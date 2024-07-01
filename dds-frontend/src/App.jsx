@@ -13,7 +13,7 @@ import { Inscriptos } from "./components/inscriptos/Inscriptos";
 import { ModalDialog } from "./components/ModalDialog";
 
 import { RequireAuth } from "./components/RequiereAuth";
-import { Login } from "./components/login/Login";
+import { Login } from "./components/login/Login.jsx";
 
 function App() {
   return (

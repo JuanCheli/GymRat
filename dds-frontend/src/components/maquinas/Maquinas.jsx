@@ -62,7 +62,6 @@ function Maquinas() {
       const data = await MaquinasService.Buscar(Nombre, ConStock, _pagina);
       console.log("Datos recibidos:", data);
       modalDialogService.BloquearPantalla(false);
-      setItem(data.Item);
       setItems(data.Items);
       setRegistrosTotal(data.totalItems);
       // Generar array de las páginas para mostrar en select del paginador

@@ -62,7 +62,7 @@ function Menu() {
             <li className="nav-item">
               <NavLink
                 className="nav-link"
-                title="exclusivo para administradores"
+                title="Exclusivo para gimnasios"
                 to="/inscriptos"
               >
                 Inscriptos

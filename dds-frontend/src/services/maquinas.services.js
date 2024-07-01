@@ -5,13 +5,12 @@ const urlResource = config.urlResourceMaquinas;
 const urlGimnasios = config.urlResourceGimnasios
 const urlProveedores = config.urlResourceProveedores
 
-// MaquinasService
 async function Buscar(Nombre, ConStock, _pagina) {
   const resp = await axios.get(urlResource, {
     params: {
       Nombre: Nombre,
       ConStock: ConStock,
-      _pagina 
+      Pagina: _pagina 
     }
   });
   return resp.data;
