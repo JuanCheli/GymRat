@@ -12,7 +12,7 @@ const users = [
   {
     usuario: "inscripto",
     clave: "123",
-    rol: "member",
+    rol: "member",  
   },
 ];
 let refreshTokens = [];
@@ -97,4 +97,5 @@ router.post("/api/token", (req, res) => {
     });
   });
 });
+
 module.exports = router;

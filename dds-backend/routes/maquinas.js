@@ -40,8 +40,8 @@ router.get("/api/maquinas", async function (req, res, next) {
 
         res.json({
             totalItems: items.count,
-            items: items.rows,
-            currentPage: page,
+            Items: items.rows,
+            Pagina: page,
             totalPages: Math.ceil(items.count / limit)
         });
     } catch (error) {
